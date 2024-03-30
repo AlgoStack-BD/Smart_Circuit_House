@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Doorways"
+rootProject.name = "Smart Circuit House"
 include(":app")

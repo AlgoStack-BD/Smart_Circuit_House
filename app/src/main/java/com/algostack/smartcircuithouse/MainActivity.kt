@@ -1,4 +1,6 @@
-package com.algostackbd.doorways
+
+
+package com.algostack.smartcircuithouse
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

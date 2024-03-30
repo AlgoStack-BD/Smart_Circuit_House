@@ -1,4 +1,4 @@
-package com.algostackbd.doorways.features.home_screen.adapter
+package com.algostack.smartcircuithouse.features.Home_Screen.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.algostackbd.doorways.R
-import com.algostackbd.doorways.features.home_screen.model.CardData
+import com.algostack.smartcircuithouse.R
+import com.algostack.smartcircuithouse.features.Home_Screen.model.CardData
 
 class CardAdapter(private val dataList: List<CardData>) :
     RecyclerView.Adapter<CardAdapter.CardViewHolder>() {

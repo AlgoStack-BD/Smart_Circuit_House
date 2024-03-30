@@ -1,4 +1,4 @@
-package com.algostackbd.doorways
+package com.algostack.smartcircuithouse
 
 import org.junit.Test
 

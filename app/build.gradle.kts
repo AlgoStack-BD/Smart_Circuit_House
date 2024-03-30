@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    namespace = "com.algostackbd.doorways"
+    namespace = "com.algostack.smartcircuithouse"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.algostackbd.doorways"
-        minSdk = 24
+        applicationId = "com.algostack.smartcircuithouse"
+        minSdk = 25
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -26,15 +26,16 @@ android {
             )
         }
     }
-    buildFeatures {
-        viewBinding =  true
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    buildFeatures{
+        viewBinding = true
     }
 }
 
@@ -45,8 +46,9 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
 }
