@@ -8,4 +8,5 @@ import com.algostack.smartcircuithouse.services.model.RoomAllocationData
     entities = [RoomAllocationData::class],
     version = 1)
 abstract class SCHLocalDB : RoomDatabase(){
+    // initialize DAO
 }
