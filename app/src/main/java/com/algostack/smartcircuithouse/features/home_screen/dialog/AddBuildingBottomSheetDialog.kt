@@ -1,0 +1,37 @@
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import androidx.fragment.app.viewModels
+import com.algostack.smartcircuithouse.R
+import com.algostack.smartcircuithouse.features.home_screen.model.BuildingViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+
+class AddBuildingBottomSheetDialog : BottomSheetDialogFragment() {
+
+    private val viewModel: BuildingViewModel by viewModels()
+
+    private lateinit var etBuildingName: EditText
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_add_building, container, false)
+        etBuildingName = view.findViewById(R.id.etBuildingName)
+        val btnSave = view.findViewById<Button>(R.id.btnSave)
+        btnSave.setOnClickListener {
+            val buildingName = etBuildingName.text.toString()
+            if (buildingName.isNotEmpty()) {
+                viewModel.saveBuilding(requireContext(), buildingName)
+                dismiss()
+            } else {
+
+            }
+        }
+        return view
+    }
+}

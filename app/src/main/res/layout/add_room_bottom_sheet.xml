@@ -1,0 +1,41 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/editTextRoomNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Room No" />
+
+        <EditText
+            android:id="@+id/editTextBedType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Bed Type" />
+
+        <EditText
+            android:id="@+id/editTextFloorNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Floor No" />
+
+        <Button
+            android:id="@+id/roomBtnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/primary"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Save"
+            android:textColor="@color/white"
+            app:cornerRadius="10dp" />
+    </LinearLayout>
+</layout>
