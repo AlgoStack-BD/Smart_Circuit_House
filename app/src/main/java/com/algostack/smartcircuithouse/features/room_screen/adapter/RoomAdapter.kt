@@ -1,0 +1,62 @@
+package com.algostack.smartcircuithouse.features.room_screen.adapter
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.algostack.smartcircuithouse.R
+import com.algostack.smartcircuithouse.services.model.RoomData
+
+class RoomAdapter(private val onBookNowClickListener: OnBookNowClickListener) :
+    ListAdapter<RoomData, RoomAdapter.RoomViewHolder>(DiffCallback) {
+
+    companion object {
+        private val DiffCallback = object : DiffUtil.ItemCallback<RoomData>() {
+            override fun areItemsTheSame(oldItem: RoomData, newItem: RoomData): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: RoomData, newItem: RoomData): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_room, parent, false)
+        return RoomViewHolder(view, onBookNowClickListener)
+    }
+
+    override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
+        val currentItem = getItem(position)
+        holder.bind(currentItem)
+    }
+
+    inner class RoomViewHolder(
+        itemView: View,
+        private val onBookNowClickListener: OnBookNowClickListener
+    ) : RecyclerView.ViewHolder(itemView) {
+        private val roomNoTextView: TextView = itemView.findViewById(R.id.textViewRoomNo)
+        private val bedTypeTextView: TextView = itemView.findViewById(R.id.textViewBedType)
+        private val floorNoTextView: TextView = itemView.findViewById(R.id.textViewFloorNo)
+        private val bookNowButton: Button = itemView.findViewById(R.id.roomBookNow)
+
+        fun bind(roomData: RoomData) {
+            roomNoTextView.text = "Room No: " + roomData.roomNo
+            bedTypeTextView.text = "Bed Type: " + roomData.bedType
+            floorNoTextView.text = "Floor No: " + roomData.floorNo.toString()
+
+            bookNowButton.setOnClickListener {
+                onBookNowClickListener.onBookNowClick(roomData)
+            }
+        }
+    }
+
+    interface OnBookNowClickListener {
+        fun onBookNowClick(roomData: RoomData)
+    }
+}

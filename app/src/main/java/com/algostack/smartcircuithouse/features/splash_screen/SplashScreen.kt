@@ -11,12 +11,10 @@ import androidx.navigation.fragment.findNavController
 import com.algostack.smartcircuithouse.R
 import com.algostack.smartcircuithouse.databinding.FragmentSplashScreenBinding
 
-
 class SplashScreen : Fragment() {
 
     var _binding: FragmentSplashScreenBinding? = null
     val binding get() = _binding!!
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

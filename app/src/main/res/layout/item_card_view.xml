@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/room2" />
+            android:src="@drawable/building_room" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,33 +36,15 @@
                 android:text="Title"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/textViewRating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
-                android:gravity="end"
-                android:paddingTop="8dp"
-                android:text="Rating"
-                android:textSize="14sp" />
-
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textViewType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Type"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/textViewDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Description"
-            android:textSize="14sp" />
+        <!--        <TextView
+                    android:id="@+id/textViewDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Description"
+                    android:textSize="14sp" />-->
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

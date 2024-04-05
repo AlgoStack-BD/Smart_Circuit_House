@@ -1,0 +1,23 @@
+package com.algostack.smartcircuithouse.features.room_screen.model
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.algostack.smartcircuithouse.services.db.RoomRepository
+import com.algostack.smartcircuithouse.services.model.RoomData
+import kotlinx.coroutines.launch
+
+class RoomViewModel(private val repository: RoomRepository) : ViewModel() {
+
+    val allRooms: LiveData<List<RoomData>> = repository.allRooms
+
+    fun getRoomsForBuilding(buildingId: Int): LiveData<List<RoomData>> {
+        return repository.getRoomsForBuilding(buildingId)
+    }
+
+    fun insert(roomData: RoomData) {
+        viewModelScope.launch {
+            repository.insert(roomData)
+        }
+    }
+}
