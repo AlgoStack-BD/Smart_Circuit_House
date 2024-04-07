@@ -28,5 +28,10 @@ interface RoomDao {
     fun getRoomsByBedType(bedType: String): LiveData<List<RoomData>>
 
 
+    @Query("SELECT * FROM rooms WHERE isBooked = 1")
+    fun getBookedRooms(): LiveData<List<RoomData>>
+
+    @Query("SELECT * FROM rooms WHERE isBooked = 0")
+    fun getUnbookedRooms(): LiveData<List<RoomData>>
 }
 

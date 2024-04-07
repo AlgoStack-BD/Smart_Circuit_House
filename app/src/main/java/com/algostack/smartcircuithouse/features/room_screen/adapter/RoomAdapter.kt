@@ -47,16 +47,16 @@ class RoomAdapter(private val onBookNowClickListener: OnBookNowClickListener) :
         private val bookNowButton: Button = itemView.findViewById(R.id.roomBookNow)
 
         fun bind(roomData: RoomData) {
-            floorNoTextView.text = /*"Floor No:  " +*/ roomData.floorNo.toString()
-            roomNoTextView.text = /*"Room No: " +*/ roomData.roomNo
-            bedTypeTextView.text = /*"Bed Type: " +*/ roomData.bedType
+            floorNoTextView.text = "Floor No:  " + roomData.floorNo.toString()
+            roomNoTextView.text = "Room No: " + roomData.roomNo
+            bedTypeTextView.text = "Bed Type: " + roomData.bedType
 
             if (roomData.isBooked) {
                 bookNowButton.text = itemView.context.getString(R.string.booked)
                 bookNowButton.setBackgroundColor(itemView.context.getColor(R.color.red))
             } else {
                 bookNowButton.text = itemView.context.getString(R.string.book_now)
-                bookNowButton.setBackgroundColor(itemView.context.getColor(R.color.primary))
+                bookNowButton.setBackgroundColor(itemView.context.getColor(R.color.green))
             }
 
             bookNowButton.setOnClickListener {

@@ -27,5 +27,12 @@ class RoomRepository(private val roomDao: RoomDao) {
         return roomDao.getRoomsByBedType(bedType)
     }
 
+    fun getBookedRooms(): LiveData<List<RoomData>> {
+        return roomDao.getBookedRooms()
+    }
+
+    fun getUnbookedRooms(): LiveData<List<RoomData>> {
+        return roomDao.getUnbookedRooms()
+    }
 
 }
