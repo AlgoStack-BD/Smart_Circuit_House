@@ -5,52 +5,67 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical"
-
     android:padding="16dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Customer Name" />
-
-    <EditText
-        android:id="@+id/editTextCustomerName"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutCustomerName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter customer name" />
+        android:layout_marginBottom="10dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Customer Details" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextCustomerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter customer name" />
 
-    <EditText
-        android:id="@+id/editTextCustomerDetails"
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutCustomerDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter customer details" />
+        android:layout_marginBottom="10dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enter Date" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextCustomerDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter customer details" />
 
-    <EditText
-        android:id="@+id/editTextEnterDate"
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutEnterDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter enter date" />
+        android:layout_marginBottom="10dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Exit Date" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextEnterDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:hint="Enter enter date"
+            android:onClick="showEnterDatePicker" />
 
-    <EditText
-        android:id="@+id/editTextExitDate"
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutExitDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter exit date" />
+        android:layout_marginBottom="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextExitDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:hint="Enter exit date"
+            android:onClick="showExitDatePicker" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/buttonBookNow"

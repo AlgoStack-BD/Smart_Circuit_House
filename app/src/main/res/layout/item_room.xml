@@ -1,63 +1,59 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="1dp">
+    android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/roomLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_margin="15dp"
+        android:elevation="0dp"
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/room" />
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/bedroom" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textViewRoomNo"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/poppins_bold"
-                android:gravity="start"
-                android:paddingTop="8dp"
-                android:text="Room No:"
-                android:textSize="16sp" />
+                android:fontFamily="@font/poppins_regular"
+                android:paddingStart="20dp"
+                android:text="Room No:" />
+
+            <TextView
+                android:id="@+id/textViewFloorNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:paddingStart="20dp"
+                android:text="Floor No:" />
+
+            <TextView
+                android:id="@+id/textViewBedType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:paddingStart="20dp"
+                android:text="Bed Type:" />
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textViewBedType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bed Type:"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/textViewFloorNo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Floor No:"
-            android:textSize="14sp" />
-
         <Button
             android:id="@+id/roomBookNow"
-            android:layout_width="match_parent"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
             android:backgroundTint="@color/primary"
             android:fontFamily="@font/poppins_regular"
             android:text="Book Now"
@@ -65,4 +61,11 @@
             app:cornerRadius="10dp" />
 
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/roomLayout"
+        android:background="#F1D29A" />
+
+</RelativeLayout>

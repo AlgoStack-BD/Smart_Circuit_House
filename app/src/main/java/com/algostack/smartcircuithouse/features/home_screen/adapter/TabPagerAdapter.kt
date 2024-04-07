@@ -3,7 +3,7 @@ package com.algostack.smartcircuithouse.features.home_screen.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.algostack.smartcircuithouse.features.home_screen.tab_layout.AllFragment
+import com.algostack.smartcircuithouse.features.home_screen.tab_layout.HomeFragment
 import com.algostack.smartcircuithouse.features.home_screen.tab_layout.BookedFragment
 import com.algostack.smartcircuithouse.features.home_screen.tab_layout.DoubleFragment
 import com.algostack.smartcircuithouse.features.home_screen.tab_layout.InOutFragment
@@ -14,7 +14,7 @@ class TabPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> AllFragment()
+            0 -> HomeFragment()
             1 -> SingleFragment()
             2 -> DoubleFragment()
             3 -> InOutFragment()
@@ -30,7 +30,7 @@ class TabPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
-            0 -> "All"
+            0 -> "Home"
             1 -> "Single"
             2 -> "Double"
             3 -> "In & Out"

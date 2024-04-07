@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
-import androidx.lifecycle.lifecycleScope
 import com.algostack.smartcircuithouse.R
 import com.algostack.smartcircuithouse.services.db.RoomDao
 import com.algostack.smartcircuithouse.services.model.RoomData
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class AddRoomBottomSheetDialog(private val roomDao: RoomDao, private val buildingId: Int) :
@@ -27,9 +28,9 @@ class AddRoomBottomSheetDialog(private val roomDao: RoomDao, private val buildin
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val etRoomNo = view.findViewById<EditText>(R.id.editTextRoomNo)
-        val etBedType = view.findViewById<EditText>(R.id.editTextBedType)
-        val etFloorNo = view.findViewById<EditText>(R.id.editTextFloorNo)
+        val etRoomNo = view.findViewById<TextInputEditText>(R.id.editTextRoomNo)
+        val etBedType = view.findViewById<TextInputEditText>(R.id.editTextBedType)
+        val etFloorNo = view.findViewById<TextInputEditText>(R.id.editTextFloorNo)
         val btnSave = view.findViewById<Button>(R.id.roomBtnSave)
 
         btnSave.setOnClickListener {
@@ -47,17 +48,15 @@ class AddRoomBottomSheetDialog(private val roomDao: RoomDao, private val buildin
                 saveRoomInfo(roomData)
                 dismiss()
             } else {
-
             }
         }
     }
 
     private fun saveRoomInfo(roomData: RoomData) {
-        lifecycleScope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             try {
                 roomDao.insert(roomData)
             } catch (e: Exception) {
-
             }
         }
     }

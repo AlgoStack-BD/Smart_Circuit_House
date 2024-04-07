@@ -20,4 +20,17 @@ class RoomViewModel(private val repository: RoomRepository) : ViewModel() {
             repository.insert(roomData)
         }
     }
+
+    fun bookRoom(roomData: RoomData) {
+        viewModelScope.launch {
+            repository.updateRoomStatus(roomData)
+        }
+    }
+
+    fun cancelRoomBooking(roomData: RoomData) {
+        viewModelScope.launch {
+            repository.cancelRoomBooking(roomData)
+        }
+    }
+
 }
