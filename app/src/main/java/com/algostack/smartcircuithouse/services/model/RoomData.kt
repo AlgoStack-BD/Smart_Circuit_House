@@ -10,5 +10,6 @@ data class RoomData(
     val roomNo: String,
     val bedType: String,
     val floorNo: Int,
-    val buildingId: Int
+    val buildingId: Int,
+    var isBooked: Boolean = false
 )

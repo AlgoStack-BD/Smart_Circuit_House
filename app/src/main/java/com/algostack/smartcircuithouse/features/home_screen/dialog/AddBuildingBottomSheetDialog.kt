@@ -8,12 +8,13 @@ import androidx.fragment.app.viewModels
 import com.algostack.smartcircuithouse.R
 import com.algostack.smartcircuithouse.features.home_screen.model.BuildingViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.textfield.TextInputEditText
 
 class AddBuildingBottomSheetDialog : BottomSheetDialogFragment() {
 
     private val viewModel: BuildingViewModel by viewModels()
 
-    private lateinit var etBuildingName: EditText
+    private lateinit var etBuildingName: TextInputEditText
 
     override fun onCreateView(
         inflater: LayoutInflater,

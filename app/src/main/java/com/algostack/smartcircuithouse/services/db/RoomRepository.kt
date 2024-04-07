@@ -14,4 +14,18 @@ class RoomRepository(private val roomDao: RoomDao) {
     suspend fun insert(roomData: RoomData) {
         roomDao.insert(roomData)
     }
+
+    suspend fun updateRoomStatus(roomData: RoomData) {
+        roomDao.updateRoom(roomData)
+    }
+
+    suspend fun cancelRoomBooking(roomData: RoomData) {
+        roomDao.cancelRoomBooking(roomData.id)
+    }
+
+    fun getRoomsByBedType(bedType: String): LiveData<List<RoomData>> {
+        return roomDao.getRoomsByBedType(bedType)
+    }
+
+
 }

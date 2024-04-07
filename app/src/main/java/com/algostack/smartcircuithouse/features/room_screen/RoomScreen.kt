@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.algostack.smartcircuithouse.R
 import com.algostack.smartcircuithouse.databinding.FragmentRoomScreenBinding
 import com.algostack.smartcircuithouse.features.room_screen.adapter.RoomAdapter
@@ -19,6 +20,7 @@ import com.algostack.smartcircuithouse.features.room_screen.model.RoomViewModel
 import com.algostack.smartcircuithouse.services.db.RoomDB
 import com.algostack.smartcircuithouse.services.db.RoomRepository
 import com.algostack.smartcircuithouse.services.model.RoomData
+import com.google.android.material.progressindicator.LinearProgressIndicator
 
 class RoomScreen : Fragment(), RoomAdapter.OnBookNowClickListener {
 
@@ -48,7 +50,6 @@ class RoomScreen : Fragment(), RoomAdapter.OnBookNowClickListener {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -61,12 +62,20 @@ class RoomScreen : Fragment(), RoomAdapter.OnBookNowClickListener {
         val adapter = RoomAdapter(this)
         binding.allRecyclerView.apply {
             this.adapter = adapter
-            layoutManager = GridLayoutManager(requireContext(), 2)
+            layoutManager = LinearLayoutManager(requireContext())
         }
 
+        val progressBar = view.findViewById<LinearProgressIndicator>(R.id.roomProgressBar)
+
         viewModel.getRoomsForBuilding(buildingId).observe(viewLifecycleOwner) { rooms ->
+            if (rooms.isEmpty()) {
+                progressBar.visibility = View.VISIBLE
+            } else {
+                progressBar.visibility = View.GONE
+            }
             adapter.submitList(rooms)
         }
+
 
         binding.fabAddRoom.setOnClickListener {
             val roomDao = RoomDB.getDatabase(requireContext()).roomDao()
@@ -76,10 +85,29 @@ class RoomScreen : Fragment(), RoomAdapter.OnBookNowClickListener {
 
     }
 
+    fun updateRoomStatus(roomData: RoomData) {
+        val adapter = binding.allRecyclerView.adapter as? RoomAdapter
+        adapter?.let {
+            val position = it.currentList.indexOfFirst { it.id == roomData.id }
+            if (position != -1) {
+                it.updateRoomStatus(position)
+            }
+        }
+    }
+
+
     override fun onBookNowClick(roomData: RoomData) {
         val bottomSheet = BookingBottomSheetDialog()
+        bottomSheet.setSelectedRoom(roomData)
+        bottomSheet.setRoomScreen(this)
         bottomSheet.show(parentFragmentManager, bottomSheet.tag)
+
     }
+
+    override fun onCancelBookingClick(roomData: RoomData) {
+        viewModel.cancelRoomBooking(roomData)
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
