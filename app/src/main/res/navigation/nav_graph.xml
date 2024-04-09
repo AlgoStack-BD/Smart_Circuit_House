@@ -37,7 +37,7 @@
         <action
             android:id="@+id/action_homeScreen_to_roomScreen"
             app:destination="@id/roomScreen"
-            app:enterAnim="@anim/slide_in_right">
+            app:enterAnim="@anim/fall_up">
             <argument
                 android:name="title"
                 app:argType="string" />
