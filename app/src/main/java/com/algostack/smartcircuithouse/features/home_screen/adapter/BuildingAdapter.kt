@@ -83,7 +83,7 @@ class BuildingAdapter(private val itemClickListener: OnItemClickListener) :
             CoroutineScope(Dispatchers.IO).launch {
                 buildingDao.delete(item.id)
             }
-            showSnackbar(itemView, "Item deleted")
+            showSnackbar(itemView, "Building deleted successfully")
         }
 
         private fun showSnackbar(view: View, message: String) {

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
+    android:background="@color/secondary"
     android:fillViewport="true"
     tools:context=".features.authentication.login_screen.LoginScreen">
 
@@ -17,9 +17,7 @@
             android:id="@+id/icClose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="15dp"
-            android:background="@color/black"
+            android:padding="20dp"
             android:src="@drawable/ic_close"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -28,8 +26,8 @@
             android:id="@+id/imageViewLoginLogo"
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:src="@drawable/logo_sch"
             android:layout_marginTop="100dp"
+            android:src="@drawable/logo_sch"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -56,7 +54,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textTitleLogin" />
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/buttonLoginWithGoogle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

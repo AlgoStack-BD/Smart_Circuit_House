@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import com.algostack.smartcircuithouse.R
 import com.algostack.smartcircuithouse.services.db.RoomDao
 import com.algostack.smartcircuithouse.services.model.RoomData
@@ -48,6 +49,15 @@ class AddRoomBottomSheetDialog(private val roomDao: RoomDao, private val buildin
                 saveRoomInfo(roomData)
                 dismiss()
             } else {
+                if (roomNo.isEmpty()) {
+                    etRoomNo.error = "Room number is required"
+                }
+                if (bedType.isEmpty()) {
+                    etBedType.error = "Bed type is required"
+                }
+                if (floorNo == null) {
+                    etFloorNo.error = "Floor number is required"
+                }
             }
         }
     }
@@ -57,6 +67,7 @@ class AddRoomBottomSheetDialog(private val roomDao: RoomDao, private val buildin
             try {
                 roomDao.insert(roomData)
             } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }

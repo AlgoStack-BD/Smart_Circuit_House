@@ -2,6 +2,7 @@ package com.algostack.smartcircuithouse.services.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
@@ -33,5 +34,20 @@ interface RoomDao {
 
     @Query("SELECT * FROM rooms WHERE isBooked = 0")
     fun getUnbookedRooms(): LiveData<List<RoomData>>
+
+    @Query("SELECT * FROM rooms WHERE customerName = :customerName")
+    fun getRoomsByCustomerName(customerName: String): LiveData<List<RoomData>>
+
+    @Query("SELECT * FROM rooms WHERE customerDetails = :customerDetails")
+    fun getRoomsByCustomerDetails(customerDetails: String): LiveData<List<RoomData>>
+
+    @Query("SELECT * FROM rooms WHERE entryDate = :entryDate")
+    fun getRoomsByEntryDate(entryDate: Long): LiveData<List<RoomData>>
+
+    @Query("SELECT * FROM rooms WHERE exitDate = :exitDate")
+    fun getRoomsByExitDate(exitDate: Long): LiveData<List<RoomData>>
+
+    @Delete
+    suspend fun delete(roomData: RoomData)
 }
 

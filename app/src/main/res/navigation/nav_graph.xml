@@ -12,6 +12,7 @@
         <action
             android:id="@+id/action_splashScreen_to_introScreen"
             app:destination="@id/introScreen"
+            app:enterAnim="@anim/fall_down"
             app:popUpTo="@id/splashScreen"
             app:popUpToInclusive="true" />
     </fragment>
@@ -23,6 +24,7 @@
         <action
             android:id="@+id/action_introScreen_to_loginScreen"
             app:destination="@id/loginScreen"
+            app:enterAnim="@anim/fall_up"
             app:popUpTo="@id/introScreen"
             app:popUpToInclusive="true" />
     </fragment>
@@ -34,7 +36,8 @@
 
         <action
             android:id="@+id/action_homeScreen_to_roomScreen"
-            app:destination="@id/roomScreen">
+            app:destination="@id/roomScreen"
+            app:enterAnim="@anim/slide_in_right">
             <argument
                 android:name="title"
                 app:argType="string" />
@@ -58,6 +61,7 @@
         <action
             android:id="@+id/action_loginScreen_to_homeScreen"
             app:destination="@id/homeScreen"
+            app:enterAnim="@android:anim/fade_in"
             app:popUpTo="@id/loginScreen"
             app:popUpToInclusive="true" />
     </fragment>

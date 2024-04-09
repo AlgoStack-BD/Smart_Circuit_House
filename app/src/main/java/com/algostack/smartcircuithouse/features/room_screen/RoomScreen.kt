@@ -22,7 +22,7 @@ import com.algostack.smartcircuithouse.services.db.RoomRepository
 import com.algostack.smartcircuithouse.services.model.RoomData
 import com.google.android.material.progressindicator.LinearProgressIndicator
 
-class RoomScreen : Fragment(), RoomAdapter.OnBookNowClickListener {
+class RoomScreen : Fragment(), RoomAdapter.OnBookNowClickListener, RoomAdapter.OnDeleteClickListener {
 
     private var _binding: FragmentRoomScreenBinding? = null
     private val binding get() = _binding!!
@@ -59,7 +59,8 @@ class RoomScreen : Fragment(), RoomAdapter.OnBookNowClickListener {
         val toolbar = view.findViewById<Toolbar>(R.id.toolbarBuildingName)
         toolbar.title = buildingName
 
-        val adapter = RoomAdapter(this)
+        val adapter = RoomAdapter(this, this)
+        adapter.setOnDeleteClickListener(this)
         binding.allRecyclerView.apply {
             this.adapter = adapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -67,13 +68,17 @@ class RoomScreen : Fragment(), RoomAdapter.OnBookNowClickListener {
 
         val progressBar = view.findViewById<LinearProgressIndicator>(R.id.roomProgressBar)
 
+        progressBar.visibility = View.VISIBLE
+
         viewModel.getRoomsForBuilding(buildingId).observe(viewLifecycleOwner) { rooms ->
             if (rooms.isEmpty()) {
-                progressBar.visibility = View.VISIBLE
+                progressBar.visibility = View.GONE
+                binding.textViewTotalRoomItems.text = "Total Items: ${rooms.size}"
             } else {
                 progressBar.visibility = View.GONE
+                adapter.submitList(rooms)
+                binding.textViewTotalRoomItems.text = "Total Items: ${rooms.size}"
             }
-            adapter.submitList(rooms)
         }
 
 
@@ -106,6 +111,10 @@ class RoomScreen : Fragment(), RoomAdapter.OnBookNowClickListener {
 
     override fun onCancelBookingClick(roomData: RoomData) {
         viewModel.cancelRoomBooking(roomData)
+    }
+
+    override fun onDeleteClick(roomData: RoomData) {
+        viewModel.deleteRoom(roomData)
     }
 
 

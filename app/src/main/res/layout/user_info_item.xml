@@ -26,28 +26,36 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textViewRoomNo"
+                android:id="@+id/nameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:paddingStart="20dp"
-                android:text="Room No:" />
+                android:text="Customer Name" />
 
             <TextView
-                android:id="@+id/textViewFloorNo"
+                android:id="@+id/detailsTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:paddingStart="20dp"
-                android:text="Floor No:" />
+                android:text="Customer Details" />
 
             <TextView
-                android:id="@+id/textViewBedType"
+                android:id="@+id/entryDateTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:paddingStart="20dp"
-                android:text="Bed Type:" />
+                android:text="Entry Date" />
+
+            <TextView
+                android:id="@+id/exitDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:paddingStart="20dp"
+                android:text="Exit Date" />
 
         </LinearLayout>
 
@@ -56,9 +64,9 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:backgroundTint="@color/green"
+            android:backgroundTint="@color/primary"
             android:fontFamily="@font/poppins_regular"
-            android:text="Book Now"
+            android:text="Booked"
             android:textColor="@color/white"
             app:cornerRadius="10dp" />
 
