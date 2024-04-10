@@ -43,74 +43,107 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageViewLoginLogo" />
 
-        <TextView
-            android:id="@+id/textSubtitleLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Sign up the family and get started immediately"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textTitleLogin" />
 
-        <Button
-            android:id="@+id/buttonLoginWithGoogle"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:backgroundTint="@color/primary"
-            android:fontFamily="@font/poppins_regular"
-            android:padding="15dp"
-            android:text="Sign up with Google"
-            android:textSize="16sp"
-            app:cornerRadius="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/textSubtitleLogin" />
-
-        <LinearLayout
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="horizontal"
+            android:layout_marginTop="50dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonLoginWithGoogle">
+            app:layout_constraintTop_toBottomOf="@+id/textTitleLogin">
 
-            <View
-                android:layout_width="100dp"
-                android:layout_height="1dp"
-                android:background="@color/black" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextEmail"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/primary"
                 android:fontFamily="@font/poppins_regular"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:text="or"
-                android:textSize="12sp" />
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-            <View
-                android:layout_width="100dp"
-                android:layout_height="1dp"
-                android:background="@color/black" />
-
-        </LinearLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonLoginWithFaceBook"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmail">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primary"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.card.MaterialCardView
+           android:id="@+id/buttonLoginWithEmailPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginTop="25dp"
             android:backgroundTint="@color/primary"
-            android:fontFamily="@font/poppins_regular"
-            android:padding="15dp"
-            android:text="Sign up with Facebook"
-            android:textSize="16sp"
-            app:cornerRadius="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/divider" />
+            app:cardCornerRadius="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword"
+            tools:layout_editor_absoluteX="10dp"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:padding="15dp"
+                    android:text="Log in"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/spin_kit"
+                    app:layout_constraintHorizontal_bias="0.67"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/spin_kit"
+                    android:visibility="invisible"
+                    style="@style/SpinKitView.Large.Wave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    app:SpinKit_Color="@color/white"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+
+
+
+
+
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
