@@ -77,4 +77,6 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
+    // Progress animation
+    implementation ("com.github.ybq:Android-SpinKit:1.4.0")
 }
