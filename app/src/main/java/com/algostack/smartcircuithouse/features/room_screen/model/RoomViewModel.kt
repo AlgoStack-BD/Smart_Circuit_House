@@ -33,4 +33,10 @@ class RoomViewModel(private val repository: RoomRepository) : ViewModel() {
         }
     }
 
+    fun deleteRoom(roomData: RoomData) {
+        viewModelScope.launch {
+            repository.deleteRoom(roomData)
+        }
+    }
+
 }

@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.algostack.smartcircuithouse.databinding.FragmentUnBookedBinding
+import com.algostack.smartcircuithouse.databinding.FragmentUnbookedBinding
 import com.algostack.smartcircuithouse.features.home_screen.model.UnbookedViewModel
 import com.algostack.smartcircuithouse.features.home_screen.model.UnbookedViewModelFactory
 import com.algostack.smartcircuithouse.features.room_screen.adapter.RoomAdapter
@@ -18,25 +18,26 @@ import com.algostack.smartcircuithouse.services.model.RoomData
 class UnbookedFragment : Fragment() {
 
     private val viewModel: UnbookedViewModel by viewModels { UnbookedViewModelFactory(requireContext()) }
-    private lateinit var binding: FragmentUnBookedBinding
+    private lateinit var binding: FragmentUnbookedBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentUnBookedBinding.inflate(inflater, container, false)
+        binding = FragmentUnbookedBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = RoomAdapter(onBookNowClickListener)
+        val adapter = RoomAdapter(onBookNowClickListener, null)
         binding.recyclerViewUnbookedRooms.adapter = adapter
         binding.recyclerViewUnbookedRooms.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.getUnbookedRooms().observe(viewLifecycleOwner, Observer { rooms ->
             adapter.submitList(rooms)
+            binding.textViewTotalUnbookedItems.text = "Total Items: ${rooms.size}"
         })
     }
 

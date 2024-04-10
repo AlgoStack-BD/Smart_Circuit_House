@@ -30,12 +30,14 @@ class BookedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = RoomAdapter(onBookNowClickListener)
+        val adapter = RoomAdapter(onBookNowClickListener, null)
+
         binding.recyclerViewBookedRooms.adapter = adapter
         binding.recyclerViewBookedRooms.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.getBookedRooms().observe(viewLifecycleOwner, Observer { rooms ->
             adapter.submitList(rooms)
+            binding.textViewTotalBookedItems.text = "Total Items: ${rooms.size}"
         })
     }
 

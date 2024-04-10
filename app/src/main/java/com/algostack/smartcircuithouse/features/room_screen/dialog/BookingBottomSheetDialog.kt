@@ -22,7 +22,6 @@ import com.google.android.material.textfield.TextInputEditText
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
-import java.util.TimeZone
 
 class BookingBottomSheetDialog : BottomSheetDialogFragment() {
 
@@ -75,14 +74,47 @@ class BookingBottomSheetDialog : BottomSheetDialogFragment() {
     }
 
     private fun handleRoomBooking() {
-        selectedRoom.isBooked = !selectedRoom.isBooked
+        val customerName = customerNameEditText.text?.toString()
+        val customerDetails = customerDetailsEditText.text?.toString()
+        val enterDate = enterDateEditText.text?.toString()
+        val exitDate = exitDateEditText.text?.toString()
+
+        if (customerName.isNullOrEmpty()) {
+            customerNameEditText.error = "Customer name is required"
+            return
+        }
+
+        if (customerDetails.isNullOrEmpty()) {
+            customerDetailsEditText.error = "Customer details are required"
+            return
+        }
+
+        if (enterDate.isNullOrEmpty()) {
+            enterDateEditText.error = "Enter date is required"
+            return
+        }
+
+        if (exitDate.isNullOrEmpty()) {
+            exitDateEditText.error = "Exit date is required"
+            return
+        }
+
+        selectedRoom.isBooked = true
+        selectedRoom.customerName = customerName
+        selectedRoom.customerDetails = customerDetails
+
+        val dateFormat = SimpleDateFormat("EEE, MMM dd, yyyy", Locale.getDefault())
+        val entryDate = dateFormat.parse(enterDate)
+        val exitDateParsed = dateFormat.parse(exitDate)
+
+        selectedRoom.entryDate = entryDate?.time
+        selectedRoom.exitDate = exitDateParsed?.time
 
         viewModel.bookRoom(selectedRoom)
 
         roomScreen.updateRoomStatus(selectedRoom)
 
-        val message =
-            if (selectedRoom.isBooked) "Room booked successfully" else "Room booking canceled"
+        val message = "Room booked successfully"
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 
         dismiss()
@@ -115,7 +147,6 @@ class BookingBottomSheetDialog : BottomSheetDialogFragment() {
 
         datePicker.show(requireActivity().supportFragmentManager, "DATE_PICKER")
     }
-
 
     fun setSelectedRoom(room: RoomData) {
         selectedRoom = room

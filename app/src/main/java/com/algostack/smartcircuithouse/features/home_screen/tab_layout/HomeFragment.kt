@@ -42,15 +42,22 @@ class HomeFragment : Fragment(), BuildingAdapter.OnItemClickListener {
         binding.homeProgressBar.visibility = View.VISIBLE
 
         buildingDao.getAllBuildings().observe(viewLifecycleOwner, Observer { buildings ->
-            binding.homeProgressBar.visibility = View.GONE
 
-            adapter.submitList(buildings.map {
-                BuildingData(
-                    id = it.id,
-                    imageResource = R.drawable.building,
-                    title = it.name
-                )
-            })
+            if (buildings.isEmpty()) {
+                binding.homeProgressBar.visibility = View.GONE
+                binding.textViewTotalBuildingItems.text = "Total Items: ${buildings.size}"
+            } else {
+                binding.homeProgressBar.visibility = View.GONE
+                adapter.submitList(buildings.map {
+                    BuildingData(
+                        id = it.id,
+                        imageResource = R.drawable.building,
+                        title = it.name
+                    )
+                })
+                binding.textViewTotalBuildingItems.text = "Total Items: ${buildings.size}"
+            }
+
         })
     }
 

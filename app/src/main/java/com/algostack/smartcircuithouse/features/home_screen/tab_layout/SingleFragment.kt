@@ -30,12 +30,14 @@ class SingleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = RoomAdapter(onBookNowClickListener)
+        val adapter = RoomAdapter(onBookNowClickListener, null)
         binding.recyclerViewSingleRooms.adapter = adapter
         binding.recyclerViewSingleRooms.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.getSingleRooms().observe(viewLifecycleOwner, Observer { rooms ->
             adapter.submitList(rooms)
+            binding.textViewTotalSingleItems.text = "Total Items: ${rooms.size}"
+
         })
     }
 

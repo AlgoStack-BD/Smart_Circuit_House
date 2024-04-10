@@ -35,4 +35,23 @@ class RoomRepository(private val roomDao: RoomDao) {
         return roomDao.getUnbookedRooms()
     }
 
+    fun getRoomsByCustomerName(customerName: String): LiveData<List<RoomData>> {
+        return roomDao.getRoomsByCustomerName(customerName)
+    }
+
+    fun getRoomsByCustomerDetails(customerDetails: String): LiveData<List<RoomData>> {
+        return roomDao.getRoomsByCustomerDetails(customerDetails)
+    }
+
+    fun getRoomsByEntryDate(entryDate: Long): LiveData<List<RoomData>> {
+        return roomDao.getRoomsByEntryDate(entryDate)
+    }
+
+    fun getRoomsByExitDate(exitDate: Long): LiveData<List<RoomData>> {
+        return roomDao.getRoomsByExitDate(exitDate)
+    }
+
+    suspend fun deleteRoom(roomData: RoomData) {
+        roomDao.delete(roomData)
+    }
 }
