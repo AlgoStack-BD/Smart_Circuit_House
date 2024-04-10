@@ -3,7 +3,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import androidx.fragment.app.viewModels
 import com.algostack.smartcircuithouse.R
 import com.algostack.smartcircuithouse.features.home_screen.model.BuildingViewModel
@@ -21,7 +20,7 @@ class AddBuildingBottomSheetDialog : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_add_building, container, false)
+        val view = inflater.inflate(R.layout.bottom_sheet_add_building, container, false)
         etBuildingName = view.findViewById(R.id.etBuildingName)
         val btnSave = view.findViewById<Button>(R.id.btnSave)
         btnSave.setOnClickListener {
@@ -30,7 +29,7 @@ class AddBuildingBottomSheetDialog : BottomSheetDialogFragment() {
                 viewModel.saveBuilding(requireContext(), buildingName)
                 dismiss()
             } else {
-
+                etBuildingName.error = "Building name is required"
             }
         }
         return view

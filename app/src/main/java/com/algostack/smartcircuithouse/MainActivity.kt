@@ -8,5 +8,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        window.statusBarColor = resources.getColor(R.color.primary)
+        window.navigationBarColor = resources.getColor(R.color.primary)
     }
 }

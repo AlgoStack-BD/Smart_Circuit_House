@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/secondary"
     android:fillViewport="true"
     tools:context=".features.intro_screen.IntroScreen">
 
@@ -27,8 +28,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
             android:text="Easy way to book your room"
-            android:textColor="#595959"
             android:textSize="20sp"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/icIntroGetStarted" />
@@ -39,7 +40,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
             android:text="Enjoy your time"
-            android:textColor="#939393"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

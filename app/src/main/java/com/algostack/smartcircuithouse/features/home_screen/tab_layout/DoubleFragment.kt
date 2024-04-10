@@ -30,12 +30,14 @@ class DoubleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = RoomAdapter(onBookNowClickListener)
+        val adapter = RoomAdapter(onBookNowClickListener, null)
         binding.recyclerViewDoubleRooms.adapter = adapter
         binding.recyclerViewDoubleRooms.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.getDoubleRooms().observe(viewLifecycleOwner, Observer { rooms ->
             adapter.submitList(rooms)
+            binding.textViewTotalDoubleItems.text = "Total Items: ${rooms.size}"
+
         })
     }
 

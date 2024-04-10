@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/secondary"
-    tools:context=".features.home_screen.tab_layout.InOutFragment">
+    tools:context=".features.home_screen.tab_layout.UnbookedFragment">
 
     <TextView
-        android:id="@+id/textViewTotalInOutItems"
+        android:id="@+id/textViewTotalUnbookedItems"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewInOut"
+        android:id="@+id/recyclerViewUnbookedRooms"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
@@ -32,7 +32,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewTotalInOutItems"
-        tools:listitem="@layout/user_info_item" />
+        app:layout_constraintTop_toBottomOf="@id/textViewTotalUnbookedItems"
+        tools:listitem="@layout/item_room" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
