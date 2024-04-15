@@ -1,6 +1,5 @@
 package com.algostack.smartcircuithouse.features.home_screen.tab_layout
 
-import android.annotation.SuppressLint
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.algostack.smartcircuithouse.R
-import com.algostack.smartcircuithouse.features.home_screen.adapter.ItemAdapter
+import com.algostack.smartcircuithouse.features.home_screen.adapter.InOutAdapter
 import com.algostack.smartcircuithouse.features.home_screen.model.InOutViewModel
 import com.algostack.smartcircuithouse.features.home_screen.model.InOutViewModelFactory
 import com.algostack.smartcircuithouse.services.db.RoomDB
@@ -21,7 +20,7 @@ import com.algostack.smartcircuithouse.services.db.RoomRepository
 class InOutFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: ItemAdapter
+    private lateinit var adapter: InOutAdapter
     private val viewModel: InOutViewModel by viewModels {
         val roomDao = RoomDB.getDatabase(requireContext()).roomDao()
         val roomRepository = RoomRepository(roomDao)
@@ -34,7 +33,7 @@ class InOutFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_in_out, container, false)
         recyclerView = view.findViewById(R.id.recyclerViewInOut)
-        adapter = ItemAdapter()
+        adapter = InOutAdapter()
 
         recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())

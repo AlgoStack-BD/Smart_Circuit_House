@@ -12,9 +12,10 @@ import com.algostack.smartcircuithouse.databinding.FragmentBookedBinding
 import com.algostack.smartcircuithouse.features.home_screen.model.BookedViewModel
 import com.algostack.smartcircuithouse.features.home_screen.model.BookedViewModelFactory
 import com.algostack.smartcircuithouse.features.room_screen.adapter.RoomAdapter
+import com.algostack.smartcircuithouse.features.room_screen.dialog.BookingBottomSheetDialog
 import com.algostack.smartcircuithouse.services.model.RoomData
 
-class BookedFragment : Fragment() {
+class BookedFragment : Fragment(), RoomAdapter.OnBookNowClickListener {
 
     private val viewModel: BookedViewModel by viewModels { BookedViewModelFactory(requireContext()) }
     private lateinit var binding: FragmentBookedBinding
@@ -30,7 +31,7 @@ class BookedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = RoomAdapter(onBookNowClickListener, null)
+        val adapter = RoomAdapter(this, null)
 
         binding.recyclerViewBookedRooms.adapter = adapter
         binding.recyclerViewBookedRooms.layoutManager = LinearLayoutManager(requireContext())
@@ -41,11 +42,13 @@ class BookedFragment : Fragment() {
         })
     }
 
-    private val onBookNowClickListener = object : RoomAdapter.OnBookNowClickListener {
-        override fun onBookNowClick(roomData: RoomData) {
-        }
+    override fun onBookNowClick(roomData: RoomData) {
+        val bookingBottomSheetDialog = BookingBottomSheetDialog()
+        bookingBottomSheetDialog.setSelectedRoom(roomData)
+        bookingBottomSheetDialog.show(parentFragmentManager, "BookingBottomSheetDialog")
+    }
 
-        override fun onCancelBookingClick(roomData: RoomData) {
-        }
+    override fun onCancelBookingClick(roomData: RoomData) {
+        viewModel.cancelRoomBooking(roomData)
     }
 }

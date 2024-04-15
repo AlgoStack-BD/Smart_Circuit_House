@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:paddingStart="20dp"
-                android:text="Customer Name" />
+                android:text="C. Name" />
 
             <TextView
                 android:id="@+id/detailsTextView"
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:paddingStart="20dp"
-                android:text="Customer Details" />
+                android:text="C. Details" />
 
             <TextView
                 android:id="@+id/entryDateTextView"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:paddingStart="20dp"
-                android:text="Entry Date" />
+                android:text="Check-in" />
 
             <TextView
                 android:id="@+id/exitDateTextView"
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:paddingStart="20dp"
-                android:text="Exit Date" />
+                android:text="Check-out" />
 
         </LinearLayout>
 

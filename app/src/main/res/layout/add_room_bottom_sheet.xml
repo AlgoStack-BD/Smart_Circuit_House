@@ -7,50 +7,64 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutCustomerName"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp">
+        android:orientation="horizontal"
+        android:weightSum="3">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextRoomNo"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutCustomerName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Room No"
-            android:inputType="number"/>
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextRoomNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Room No"
+                android:inputType="number" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutCustomerDetails"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp">
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextBedType"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutEnterDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Bed Type"
-            android:inputType="text"/>
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextFloorNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Floor No"
+                android:inputType="number" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutEnterDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp">
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextFloorNo"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutCustomerDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Floor No"
-            android:inputType="number"/>
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
 
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_weight="1">
+
+            <Spinner
+                android:id="@+id/spinnerBedType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Bed Type" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/roomBtnSave"
