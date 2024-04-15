@@ -3,6 +3,8 @@ package com.algostack.smartcircuithouse.features.home_screen.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -10,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.algostack.smartcircuithouse.R
 import com.algostack.smartcircuithouse.features.home_screen.model.Item
 
-class ItemAdapter : ListAdapter<Item, ItemAdapter.ItemViewHolder>(ItemDiffCallback()) {
+class InOutAdapter : ListAdapter<Item, InOutAdapter.ItemViewHolder>(ItemDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -21,6 +23,10 @@ class ItemAdapter : ListAdapter<Item, ItemAdapter.ItemViewHolder>(ItemDiffCallba
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
+
+        holder.itemView.startAnimation(
+            AnimationUtils.loadAnimation(holder.itemView.context, R.anim.fall_down)
+        )
     }
 
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -31,10 +37,10 @@ class ItemAdapter : ListAdapter<Item, ItemAdapter.ItemViewHolder>(ItemDiffCallba
         private val exitDateTextView: TextView = itemView.findViewById(R.id.exitDateTextView)
 
         fun bind(item: Item) {
-            nameTextView.text = "Customer Name: " + item.name
-            detailsTextView.text = "Customer Details: " + item.details
-            entryDateTextView.text = "Entry Date: " + item.entryDate
-            exitDateTextView.text = "Exit Date: " + item.exitDate
+            nameTextView.text = "C. Name: " + item.name
+            detailsTextView.text = "C. Details: " + item.details
+            entryDateTextView.text = "Check-in: " + item.entryDate
+            exitDateTextView.text = "Check-out: " + item.exitDate
         }
     }
 

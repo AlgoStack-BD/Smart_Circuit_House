@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Spinner
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.algostack.smartcircuithouse.R
 import com.algostack.smartcircuithouse.services.db.RoomDao
 import com.algostack.smartcircuithouse.services.model.RoomData
@@ -30,16 +33,29 @@ class AddRoomBottomSheetDialog(private val roomDao: RoomDao, private val buildin
         super.onViewCreated(view, savedInstanceState)
 
         val etRoomNo = view.findViewById<TextInputEditText>(R.id.editTextRoomNo)
-        val etBedType = view.findViewById<TextInputEditText>(R.id.editTextBedType)
+        val spinnerBedType: Spinner = view.findViewById(R.id.spinnerBedType)
         val etFloorNo = view.findViewById<TextInputEditText>(R.id.editTextFloorNo)
         val btnSave = view.findViewById<Button>(R.id.roomBtnSave)
+        val bedTypesArray = resources.getStringArray(R.array.bed_types).toMutableList()
+
+        bedTypesArray.add(0, getString(R.string.bed_type_hint))
+
+        val adapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            bedTypesArray
+        ).apply {
+            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        }
+
+        spinnerBedType.adapter = adapter
 
         btnSave.setOnClickListener {
-            val roomNo = etRoomNo.text.toString()
-            val bedType = etBedType.text.toString()
-            val floorNo = etFloorNo.text.toString().toIntOrNull()
+            val roomNo = etRoomNo.text.toString().trim()
+            val bedType = spinnerBedType.selectedItem.toString().trim()
+            val floorNo = etFloorNo.text.toString().trim().toIntOrNull()
 
-            if (roomNo.isNotEmpty() && bedType.isNotEmpty() && floorNo != null) {
+            if (roomNo.isNotEmpty() && bedType != getString(R.string.bed_type_hint) && floorNo != null) {
                 val roomData = RoomData(
                     roomNo = roomNo,
                     bedType = bedType,
@@ -52,8 +68,8 @@ class AddRoomBottomSheetDialog(private val roomDao: RoomDao, private val buildin
                 if (roomNo.isEmpty()) {
                     etRoomNo.error = "Room number is required"
                 }
-                if (bedType.isEmpty()) {
-                    etBedType.error = "Bed type is required"
+                if (bedType == getString(R.string.bed_type_hint)) {
+                    Toast.makeText(requireContext(), "Please select a bed type", Toast.LENGTH_SHORT).show()
                 }
                 if (floorNo == null) {
                     etFloorNo.error = "Floor number is required"

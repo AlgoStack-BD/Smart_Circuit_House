@@ -12,9 +12,10 @@ import com.algostack.smartcircuithouse.databinding.FragmentSingleBinding
 import com.algostack.smartcircuithouse.features.home_screen.model.SingleViewModelFactory
 import com.algostack.smartcircuithouse.features.home_screen.model.SingleViewModel
 import com.algostack.smartcircuithouse.features.room_screen.adapter.RoomAdapter
+import com.algostack.smartcircuithouse.features.room_screen.dialog.BookingBottomSheetDialog
 import com.algostack.smartcircuithouse.services.model.RoomData
 
-class SingleFragment : Fragment() {
+class SingleFragment : Fragment(), RoomAdapter.OnBookNowClickListener {
 
     private val viewModel: SingleViewModel by viewModels { SingleViewModelFactory(requireContext()) }
     private lateinit var binding: FragmentSingleBinding
@@ -30,22 +31,23 @@ class SingleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = RoomAdapter(onBookNowClickListener, null)
+        val adapter = RoomAdapter(this, null)
         binding.recyclerViewSingleRooms.adapter = adapter
         binding.recyclerViewSingleRooms.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.getSingleRooms().observe(viewLifecycleOwner, Observer { rooms ->
             adapter.submitList(rooms)
             binding.textViewTotalSingleItems.text = "Total Items: ${rooms.size}"
-
         })
     }
 
-    private val onBookNowClickListener = object : RoomAdapter.OnBookNowClickListener {
-        override fun onBookNowClick(roomData: RoomData) {
-        }
+    override fun onBookNowClick(roomData: RoomData) {
+        val bookingBottomSheetDialog = BookingBottomSheetDialog()
+        bookingBottomSheetDialog.setSelectedRoom(roomData)
+        bookingBottomSheetDialog.show(parentFragmentManager, "BookingBottomSheetDialog")
+    }
 
-        override fun onCancelBookingClick(roomData: RoomData) {
-        }
+    override fun onCancelBookingClick(roomData: RoomData) {
+        viewModel.cancelRoomBooking(roomData)
     }
 }
