@@ -33,7 +33,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="Profile"
+        android:text="@string/profile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
 
@@ -51,64 +51,68 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="Edit Profile" />
+            android:text="Demo Email" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/onlineSyncTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Online Sync"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profileOptionsLayout" />
 
     <LinearLayout
-        android:id="@+id/onlineSyncOptionsLayout"
+        android:id="@+id/SyncData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/onlineSyncTitle">
+        app:layout_constraintTop_toBottomOf="@id/profileOptionsLayout">
 
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:src="@drawable/syncdata"
+
+            />
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Online Backup" />
+            android:fontFamily="@font/poppins_bold"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:text="@string/sync_data" />
+
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/backupTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Backup"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/onlineSyncOptionsLayout" />
 
     <LinearLayout
-        android:id="@+id/backupTitleOptionsLayout"
+        android:id="@+id/backupData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/backupTitle">
+        app:layout_constraintTop_toBottomOf="@id/SyncData">
 
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:src="@drawable/databackup"
+
+            />
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Backup" />
+            android:fontFamily="@font/poppins_bold"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:text="@string/backup" />
     </LinearLayout>
+
+
+
 
     <TextView
         android:id="@+id/aboutTitle"
@@ -117,9 +121,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="About"
+        android:text="@string/about"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/backupTitleOptionsLayout" />
+        app:layout_constraintTop_toBottomOf="@id/backupData" />
 
     <LinearLayout
         android:id="@+id/aboutTitleOptionsLayout"
@@ -135,7 +139,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="About" />
+            android:text="@string/about" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/changeLanguage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/aboutTitleOptionsLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/change_language" />
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

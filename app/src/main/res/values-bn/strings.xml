@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SCH</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -7,10 +8,11 @@
     <string name="book_now">Book Now</string>
 
     <string name="bed_type_hint">Bed Type</string>
-    <string name="easy_way_to_book_your_room">Easy way to book your room</string>
-    <string name="enjoy_your_time">Enjoy your time</string>
-    <string name="let_s_go">Let\'s Go</string>
-    <string name="let_s_get_started">Let\'s Get Started</string>
+    <string name="easy_way_to_book_your_room">সহজেই রুম বুক করুন</string>
+    <string name="enjoy_your_time">রহস্যময় কেউ উপভোগ্য করে তুলুন</string>
+    <string name="let_s_go">অগ্রসর হই</string>
+    <string name="let_s_get_started">শুরু করা যাক</string>
+
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="log_in">Log in</string>
@@ -42,9 +44,10 @@
     <string name="bangla">Bangla</string>
 
 
+
     <string-array name="bed_types">
-        <item>Single</item>
-        <item>Double</item>
+        <item>সিঙ্গেল</item>
+        <item>ডাবল</item>
     </string-array>
 
 </resources>

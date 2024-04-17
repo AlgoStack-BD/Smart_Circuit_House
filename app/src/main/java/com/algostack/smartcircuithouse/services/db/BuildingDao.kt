@@ -17,4 +17,13 @@ interface BuildingDao {
 
     @Query("DELETE FROM buildings WHERE id = :buildingId")
     suspend fun delete(buildingId: Int)
+
+    @Query("SELECT * FROM buildings")
+    suspend fun getAllBuildingsForBackup(): List<BuildingData>
+
+    // get building by id
+    @Query("SELECT * FROM buildings WHERE id = :buildingId")
+    suspend fun getBuildingById(buildingId: Int): BuildingData
+
+
 }

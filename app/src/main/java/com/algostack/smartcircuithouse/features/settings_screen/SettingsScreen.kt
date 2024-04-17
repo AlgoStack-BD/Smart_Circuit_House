@@ -1,6 +1,7 @@
 package com.algostack.smartcircuithouse.features.settings_screen
 
 import android.os.Bundle
+import android.view.KeyEvent.DispatcherState
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,13 +9,30 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.algostack.smartcircuithouse.R
 import com.algostack.smartcircuithouse.databinding.FragmentSettingsScreenBinding
+import com.algostack.smartcircuithouse.features.home_screen.model.DoubleViewModel
+import com.algostack.smartcircuithouse.features.home_screen.model.DoubleViewModelFactory
+import com.algostack.smartcircuithouse.features.room_screen.dialog.AddRoomBottomSheetDialog
+import com.algostack.smartcircuithouse.features.settings_screen.Model.SettingViewModelFactory
+import com.algostack.smartcircuithouse.features.settings_screen.language_change.LanguageChangeBottomSheetDialog
+import com.algostack.smartcircuithouse.features.settings_screen.viewmodel.SettingViewModel
+import com.algostack.smartcircuithouse.services.db.RoomDB
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SettingsScreen : Fragment() {
 
     private var _binding: FragmentSettingsScreenBinding? = null
     private val binding get() = _binding!!
+    val firebaseAuth = FirebaseAuth.getInstance()
+    val currentUser = firebaseAuth.currentUser
+    private val settingViewModel by viewModels<SettingViewModel> { SettingViewModelFactory(requireContext()) }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +55,43 @@ class SettingsScreen : Fragment() {
         toolbar.setNavigationOnClickListener {
             requireActivity().onBackPressed()
         }
+
+//
+//        if (currentUser != null) {
+//            // User is signed in
+//            // Proceed to get email (explained below)
+//        } else {
+//            // No user is signed in
+//        }
+
+
+        binding.backupData.setOnClickListener {
+            // impliment bcakaground task to backup data
+
+            CoroutineScope(Dispatchers.Main).launch {
+                settingViewModel.buildingDataBackup()
+                settingViewModel.roomDataBackup()
+            }
+
+        }
+
+
+        binding.SyncData.setOnClickListener {
+            CoroutineScope(Dispatchers.Main).launch {
+                settingViewModel.syncData()
+            }
+        }
+
+
+        binding.changeLanguage.setOnClickListener {
+
+            val bottomSheet = LanguageChangeBottomSheetDialog()
+            bottomSheet.show(parentFragmentManager, bottomSheet.tag)
+        }
+
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
