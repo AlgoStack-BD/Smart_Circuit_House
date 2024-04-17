@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.algostack.smartcircuithouse.R
+import androidx.navigation.fragment.findNavController
 import com.algostack.smartcircuithouse.databinding.FragmentHomeScreenBinding
 import com.algostack.smartcircuithouse.features.home_screen.adapter.TabPagerAdapter
 import com.algostack.smartcircuithouse.features.home_screen.model.BuildingViewModel
@@ -36,6 +37,11 @@ class HomeScreen : Fragment() {
             val bottomSheet = AddBuildingBottomSheetDialog()
             bottomSheet.show(parentFragmentManager, bottomSheet.tag)
         }
+
+        binding.settingsImage.setOnClickListener {
+            findNavController().navigate(R.id.action_homeScreen_to_settingsScreen)
+        }
+
 
         val adapter = TabPagerAdapter(childFragmentManager)
         binding.viewPager.adapter = adapter

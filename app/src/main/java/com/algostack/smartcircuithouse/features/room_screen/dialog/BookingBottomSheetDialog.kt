@@ -103,6 +103,12 @@ class BookingBottomSheetDialog : BottomSheetDialogFragment() {
         selectedRoom.customerName = customerName
         selectedRoom.customerDetails = customerDetails
 
+        val buildingId = selectedRoom.buildingId
+        val buildingName = selectedRoom.roomBuildingName
+        val floorNumber = selectedRoom.floorNo
+        val roomNumber = selectedRoom.roomNo
+        val bedType = selectedRoom.bedType
+
         val dateFormat = SimpleDateFormat("EEE, MMM dd, yyyy", Locale.getDefault())
         val entryDate = dateFormat.parse(enterDate)
         val exitDateParsed = dateFormat.parse(exitDate)
@@ -110,13 +116,12 @@ class BookingBottomSheetDialog : BottomSheetDialogFragment() {
         selectedRoom.entryDate = entryDate?.time
         selectedRoom.exitDate = exitDateParsed?.time
 
-        viewModel.bookRoom(selectedRoom)
+        viewModel.bookRoom(selectedRoom, buildingId, buildingName, floorNumber, roomNumber, bedType)
 
         roomScreen.updateRoomStatus(selectedRoom)
 
         val message = "Room booked successfully"
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-
         dismiss()
     }
 

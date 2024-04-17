@@ -31,12 +31,22 @@ class InOutAdapter : ListAdapter<Item, InOutAdapter.ItemViewHolder>(ItemDiffCall
 
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        private val buildingNameTextView: TextView = itemView.findViewById(R.id.buildingNameTextView)
+        private val roomNumberTextView: TextView = itemView.findViewById(R.id.roomNumberTextView)
+        private val floorNumberTextView: TextView = itemView.findViewById(R.id.floorNumberTextView)
+        private val bedTypeTextView: TextView = itemView.findViewById(R.id.bedTypeTextView)
+
         private val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
         private val detailsTextView: TextView = itemView.findViewById(R.id.detailsTextView)
         private val entryDateTextView: TextView = itemView.findViewById(R.id.entryDateTextView)
         private val exitDateTextView: TextView = itemView.findViewById(R.id.exitDateTextView)
 
         fun bind(item: Item) {
+            buildingNameTextView.text = item.roomBuildingName
+            roomNumberTextView.text = item.roomNumber
+            floorNumberTextView.text = item.floorNumber
+            bedTypeTextView.text = item.bedType
+
             nameTextView.text = "C. Name: " + item.name
             detailsTextView.text = "C. Details: " + item.details
             entryDateTextView.text = "Check-in: " + item.entryDate

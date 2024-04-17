@@ -16,6 +16,9 @@ interface RoomDao {
     @Update
     suspend fun updateRoom(roomData: RoomData)
 
+    @Query("UPDATE rooms SET buildingId = :buildingId, roomBuildingName = :buildingName, floorNo = :floorNumber, roomNo = :roomNumber, bedType = :bedType WHERE id = :roomId")
+    suspend fun updateRoomDetails(roomId: Long, buildingId: Int, buildingName: String, floorNumber: kotlin.String, roomNumber: String, bedType: String)
+
     @Query("UPDATE rooms SET isBooked = 0 WHERE id = :roomId")
     suspend fun cancelRoomBooking(roomId: Long)
 

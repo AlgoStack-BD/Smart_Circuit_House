@@ -46,8 +46,6 @@ class LoginScreen : Fragment() {
     }
 
 
-
-
     private fun validateUserInput() {
         val email = binding.editTextEmail.text.toString()
         val password = binding.editTextPassword.text.toString()
@@ -60,21 +58,26 @@ class LoginScreen : Fragment() {
             binding.editTextPassword.error = "Password is required"
         } else {
 
-
+            binding.tvLogin.visibility = View.INVISIBLE
             binding.spinKit.visibility = View.VISIBLE
             firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
+                        binding.tvLogin.visibility = View.VISIBLE
+                        binding.tvLogin.text = "Login successful"
                         binding.spinKit.visibility = View.INVISIBLE
                         findNavController().navigate(R.id.action_loginScreen_to_homeScreen)
                     } else {
-                        Toast.makeText(requireContext(), "Invalid email or password", Toast.LENGTH_SHORT)
+                        Toast.makeText(
+                            requireContext(),
+                            "Invalid email or password",
+                            Toast.LENGTH_SHORT
+                        )
                             .show()
+                        binding.tvLogin.visibility = View.VISIBLE
                         binding.spinKit.visibility = View.INVISIBLE
                     }
                 }
-
-
 
         }
     }
