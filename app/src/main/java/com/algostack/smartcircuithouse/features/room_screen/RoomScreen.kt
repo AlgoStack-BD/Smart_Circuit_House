@@ -84,9 +84,10 @@ class RoomScreen : Fragment(), RoomAdapter.OnBookNowClickListener, RoomAdapter.O
 
         binding.fabAddRoom.setOnClickListener {
             val roomDao = RoomDB.getDatabase(requireContext()).roomDao()
-            val bottomSheet = AddRoomBottomSheetDialog(roomDao, buildingId)
+            val bottomSheet = AddRoomBottomSheetDialog(roomDao, buildingId, buildingName)
             bottomSheet.show(parentFragmentManager, bottomSheet.tag)
         }
+
 
     }
 

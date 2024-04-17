@@ -18,7 +18,11 @@ class InOutViewModel(private val roomRepository: RoomRepository) : ViewModel() {
                 room.customerName ?: "",
                 room.customerDetails ?: "",
                 formatDate(room.entryDate),
-                formatDate(room.exitDate)
+                formatDate(room.exitDate),
+                room.roomBuildingName ?: "",
+                room.roomNo ?: "",
+                room.floorNo ?: "",
+                room.bedType ?: ""
             )
         }
     }

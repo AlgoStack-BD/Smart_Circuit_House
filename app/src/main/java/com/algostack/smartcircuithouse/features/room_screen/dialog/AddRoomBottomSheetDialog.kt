@@ -18,7 +18,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class AddRoomBottomSheetDialog(private val roomDao: RoomDao, private val buildingId: Int) :
+class AddRoomBottomSheetDialog(private val roomDao: RoomDao, private val buildingId: Int, private val buildingName: String) :
     BottomSheetDialogFragment() {
 
     override fun onCreateView(
@@ -53,14 +53,15 @@ class AddRoomBottomSheetDialog(private val roomDao: RoomDao, private val buildin
         btnSave.setOnClickListener {
             val roomNo = etRoomNo.text.toString().trim()
             val bedType = spinnerBedType.selectedItem.toString().trim()
-            val floorNo = etFloorNo.text.toString().trim().toIntOrNull()
+            val floorNo = etFloorNo.text.toString().trim()
 
             if (roomNo.isNotEmpty() && bedType != getString(R.string.bed_type_hint) && floorNo != null) {
                 val roomData = RoomData(
                     roomNo = roomNo,
                     bedType = bedType,
                     floorNo = floorNo,
-                    buildingId = buildingId
+                    buildingId = buildingId,
+                    roomBuildingName = buildingName,
                 )
                 saveRoomInfo(roomData)
                 dismiss()
