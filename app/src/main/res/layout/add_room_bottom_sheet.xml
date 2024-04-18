@@ -25,7 +25,7 @@
                 android:id="@+id/editTextRoomNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Room No"
+                android:hint="@string/room_no"
                 android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -42,7 +42,7 @@
                 android:id="@+id/editTextFloorNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Floor No"
+                android:hint="@string/floor_no"
                 android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -60,7 +60,7 @@
                 android:id="@+id/spinnerBedType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Bed Type" />
+                android:hint="@string/bed_type" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,7 +74,7 @@
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/primary"
         android:fontFamily="@font/poppins_regular"
-        android:text="Save"
+        android:text="@string/save"
         android:textColor="@color/white"
         app:cornerRadius="10dp" />
 </LinearLayout>

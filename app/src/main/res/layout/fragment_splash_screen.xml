@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:fontFamily="@font/poppins_light"
         android:textSize="12sp"
-        android:text="Made By"/>
+        android:text="@string/owned_by"/>
 
     <TextView
         android:id="@+id/tvCompanyName"
@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:fontFamily="@font/poppins_light"
         android:textSize="14sp"
-        android:text="District Administration Rangpur"/>
+        android:text="@string/rangpur_dc_office"/>
 
     <TextView
         android:id="@+id/tvPoweredBy"
@@ -50,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:fontFamily="@font/poppins_light"
         android:textSize="12sp"
-        android:text="Powered By"/>
+        android:text="@string/powered_by"/>
 
     <TextView
         android:layout_width="wrap_content"

@@ -13,8 +13,13 @@ interface RoomDao {
     @Insert
     suspend fun insert(roomData: RoomData)
 
+
+
     @Update
     suspend fun updateRoom(roomData: RoomData)
+
+    @Query("SELECT * FROM rooms")
+    suspend fun getAllRoomDataForBackup(): List<RoomData>
 
     @Query("UPDATE rooms SET buildingId = :buildingId, roomBuildingName = :buildingName, floorNo = :floorNumber, roomNo = :roomNumber, bedType = :bedType WHERE id = :roomId")
     suspend fun updateRoomDetails(roomId: Long, buildingId: Int, buildingName: String, floorNumber: kotlin.String, roomNumber: String, bedType: String)
@@ -55,5 +60,7 @@ interface RoomDao {
 
     @Delete
     suspend fun delete(roomData: RoomData)
+
+
 }
 

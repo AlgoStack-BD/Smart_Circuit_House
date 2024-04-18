@@ -17,7 +17,7 @@
             android:id="@+id/editTextCustomerName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="C. Name"
+            android:hint="@string/c_name"
             android:inputType="text"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -32,9 +32,11 @@
             android:id="@+id/editTextCustomerDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:hint="C. Details"
             android:maxLines="1"
             android:ellipsize="end"
+
             android:inputType="text"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -58,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="false"
-                android:hint="Check-in"
+                android:hint="@string/check_in"
                 android:onClick="showEnterDatePicker" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -76,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="false"
-                android:hint="Check-out"
+                android:hint="@string/check_out"
                 android:onClick="showExitDatePicker" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -91,7 +93,7 @@
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/primary"
         android:fontFamily="@font/poppins_regular"
-        android:text="Book Now"
+        android:text="@string/book_now"
         android:textColor="@color/white"
         app:cornerRadius="10dp" />
 </LinearLayout>

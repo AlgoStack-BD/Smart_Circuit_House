@@ -34,7 +34,7 @@
         android:fontFamily="@font/poppins_regular"
         android:padding="8dp"
         android:gravity="end"
-        android:text="Total items:"
+        android:text="@string/total_items"
         android:textColor="@android:color/black"
         android:textSize="14sp"
         android:layout_below="@id/appBarLayoutRoom"
