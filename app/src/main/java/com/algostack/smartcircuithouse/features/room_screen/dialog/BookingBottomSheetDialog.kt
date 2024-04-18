@@ -1,10 +1,12 @@
 package com.algostack.smartcircuithouse.features.room_screen.dialog
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
@@ -25,19 +27,19 @@ import java.util.Locale
 
 class BookingBottomSheetDialog : BottomSheetDialogFragment() {
 
-    private val viewModel: RoomViewModel by viewModels {
-        object : ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                val roomDao = RoomDB.getDatabase(requireContext()).roomDao()
-                val roomRepository = RoomRepository(roomDao)
+    private val viewModel: RoomViewModel by lazy {
+        val roomDao = RoomDB.getDatabase(requireContext()).roomDao()
+        val roomRepository = RoomRepository(roomDao)
 
+        ViewModelProvider(this, object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 if (modelClass.isAssignableFrom(RoomViewModel::class.java)) {
                     @Suppress("UNCHECKED_CAST")
                     return RoomViewModel(roomRepository) as T
                 }
                 throw IllegalArgumentException("Unknown ViewModel class")
             }
-        }
+        }).get(RoomViewModel::class.java)
     }
 
     private lateinit var selectedRoom: RoomData
@@ -74,6 +76,12 @@ class BookingBottomSheetDialog : BottomSheetDialogFragment() {
     }
 
     private fun handleRoomBooking() {
+
+        if (!::roomScreen.isInitialized) {
+            Toast.makeText(requireContext(), "roomScreen is not initialized", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val customerName = customerNameEditText.text?.toString()
         val customerDetails = customerDetailsEditText.text?.toString()
         val enterDate = enterDateEditText.text?.toString()
@@ -113,6 +121,11 @@ class BookingBottomSheetDialog : BottomSheetDialogFragment() {
         val entryDate = dateFormat.parse(enterDate)
         val exitDateParsed = dateFormat.parse(exitDate)
 
+        if (exitDateParsed?.before(entryDate) == true) {
+            exitDateEditText.error = "Exit date must be greater than enter date"
+            return
+        }
+
         selectedRoom.entryDate = entryDate?.time
         selectedRoom.exitDate = exitDateParsed?.time
 
@@ -125,32 +138,31 @@ class BookingBottomSheetDialog : BottomSheetDialogFragment() {
         dismiss()
     }
 
-    private fun showDatePicker(editText: TextInputEditText) {
-        val currentTime = System.currentTimeMillis()
+    private fun showDatePicker(editText: EditText) {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
 
-        val constraintsBuilder = CalendarConstraints.Builder()
-            .setStart(currentTime)
-            .build()
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            R.style.DatePickerDialogStyle,
+            { _, year, month, dayOfMonth ->
+                val selectedDate = Calendar.getInstance().apply {
+                    set(year, month, dayOfMonth)
+                }.time
 
-        val datePicker = MaterialDatePicker.Builder.datePicker()
-            .setTitleText("Select date")
-            .setSelection(currentTime)
-            .setCalendarConstraints(constraintsBuilder)
-            .build()
+                val dateFormat = SimpleDateFormat("EEE, MMM dd, yyyy", Locale.getDefault())
+                val formattedDate = dateFormat.format(selectedDate)
 
-        datePicker.addOnPositiveButtonClickListener { selection ->
-            val calendar = Calendar.getInstance().apply {
-                this.timeInMillis = selection
-            }
-            val selectedDate = calendar.time
+                editText.setText(formattedDate)
+            },
+            year,
+            month,
+            dayOfMonth
+        )
 
-            val dateFormat = SimpleDateFormat("EEE, MMM dd, yyyy", Locale.getDefault())
-            val formattedDate = dateFormat.format(selectedDate)
-
-            editText.setText(formattedDate)
-        }
-
-        datePicker.show(requireActivity().supportFragmentManager, "DATE_PICKER")
+        datePickerDialog.show()
     }
 
     fun setSelectedRoom(room: RoomData) {

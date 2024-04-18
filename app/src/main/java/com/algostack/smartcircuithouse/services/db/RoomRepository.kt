@@ -27,6 +27,10 @@ class RoomRepository(private val roomDao: RoomDao) {
         roomDao.cancelRoomBooking(roomData.id)
     }
 
+    suspend fun cancelBooking(roomId: Long) {
+        roomDao.cancelBooking(roomId)
+    }
+
     fun getRoomsByBedType(bedType: String): LiveData<List<RoomData>> {
         return roomDao.getRoomsByBedType(bedType)
     }

@@ -26,6 +26,14 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/textViewRoomBuildingName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:paddingStart="20dp"
+                android:text="Room No:" />
+
+            <TextView
                 android:id="@+id/textViewRoomNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -5,4 +5,9 @@
         <item name="android:fontFamily">@font/poppins_regular</item>
     </style>
 
+    <style name="DatePickerDialogStyle" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="colorAccent">@color/primary</item>
+    </style>
+
+
 </resources>

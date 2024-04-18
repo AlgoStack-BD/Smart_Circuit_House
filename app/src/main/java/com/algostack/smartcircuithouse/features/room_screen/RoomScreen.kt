@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.algostack.smartcircuithouse.R
 import com.algostack.smartcircuithouse.databinding.FragmentRoomScreenBinding
@@ -81,23 +80,18 @@ class RoomScreen : Fragment(), RoomAdapter.OnBookNowClickListener, RoomAdapter.O
             }
         }
 
-
         binding.fabAddRoom.setOnClickListener {
             val roomDao = RoomDB.getDatabase(requireContext()).roomDao()
             val bottomSheet = AddRoomBottomSheetDialog(roomDao, buildingId, buildingName)
             bottomSheet.show(parentFragmentManager, bottomSheet.tag)
         }
-
-
     }
 
     fun updateRoomStatus(roomData: RoomData) {
-        val adapter = binding.allRecyclerView.adapter as? RoomAdapter
-        adapter?.let {
-            val position = it.currentList.indexOfFirst { it.id == roomData.id }
-            if (position != -1) {
-                it.updateRoomStatus(position)
-            }
+        val adapter = _binding?.allRecyclerView?.adapter as? RoomAdapter ?: return
+        val position = adapter.currentList.indexOfFirst { it.id == roomData.id }
+        if (position != -1) {
+            adapter.updateRoomStatus(position)
         }
     }
 
@@ -107,7 +101,6 @@ class RoomScreen : Fragment(), RoomAdapter.OnBookNowClickListener, RoomAdapter.O
         bottomSheet.setSelectedRoom(roomData)
         bottomSheet.setRoomScreen(this)
         bottomSheet.show(parentFragmentManager, bottomSheet.tag)
-
     }
 
     override fun onCancelBookingClick(roomData: RoomData) {
@@ -117,7 +110,6 @@ class RoomScreen : Fragment(), RoomAdapter.OnBookNowClickListener, RoomAdapter.O
     override fun onDeleteClick(roomData: RoomData) {
         viewModel.deleteRoom(roomData)
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
