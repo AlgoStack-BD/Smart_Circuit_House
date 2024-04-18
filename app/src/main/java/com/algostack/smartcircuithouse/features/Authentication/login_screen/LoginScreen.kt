@@ -1,5 +1,6 @@
 package com.algostack.smartcircuithouse.features.authentication.login_screen
 
+import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
@@ -11,12 +12,16 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.algostack.smartcircuithouse.R
 import com.algostack.smartcircuithouse.databinding.FragmentLoginScreenBinding
+import com.algostack.smartcircuithouse.utils.TokenManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class LoginScreen : Fragment() {
 
     private val firebaseAuth = Firebase.auth
+    private val firebaseUser = firebaseAuth.currentUser
+
+
 
 
     var _binding: FragmentLoginScreenBinding? = null
@@ -63,6 +68,9 @@ class LoginScreen : Fragment() {
             firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
+
+                        // save firebse UID in shared preferences and check if user is already logged in or not
+                       TokenManager(requireContext()).saveUid(firebaseUser?.uid.toString())
                         binding.tvLogin.visibility = View.VISIBLE
                         binding.tvLogin.text = "Login successful"
                         binding.spinKit.visibility = View.INVISIBLE

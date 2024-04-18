@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:title="Smart Circuit House"
+            app:title="@string/smart_circuit_house"
             app:titleTextAppearance="@style/ToolbarTitle"
             app:titleTextColor="@color/white">
 

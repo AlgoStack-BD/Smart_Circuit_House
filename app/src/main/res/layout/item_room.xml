@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:paddingStart="20dp"
-                android:text="Room No:" />
+                android:text="@string/room_no_" />
 
             <TextView
                 android:id="@+id/textViewFloorNo"
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:paddingStart="20dp"
-                android:text="Floor No:" />
+                android:text="@string/floor_no_" />
 
             <TextView
                 android:id="@+id/textViewBedType"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:paddingStart="20dp"
-                android:text="Bed Type:" />
+                android:text="@string/bed_type_" />
 
         </LinearLayout>
 
@@ -58,7 +58,7 @@
             android:layout_gravity="center"
             android:backgroundTint="@color/green"
             android:fontFamily="@font/poppins_regular"
-            android:text="Book Now"
+            android:text="@string/book_now"
             android:textColor="@color/white"
             app:cornerRadius="10dp" />
 
