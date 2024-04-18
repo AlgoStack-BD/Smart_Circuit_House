@@ -38,7 +38,7 @@ class DataBackupRepository (
                         // Data exists in Firebase
                         // Check if ID number exists
                         for (buildingData in buildingDataList) {
-                            if (!snapshot.hasChild(buildingData.id.toString())) {
+                            if (!snapshot.hasChild(buildingData.primaryKey.toString())) {
                                 // ID number doesn't exist, save data
                                 firebaseBuildingReference.child(buildingData.id.toString()).setValue(buildingData)
                             }
@@ -46,7 +46,7 @@ class DataBackupRepository (
                     } else {
                         // Firebase database is empty, save all data
                         buildingDataList.forEach { roomData ->
-                            firebaseBuildingReference.child(roomData.id.toString()).setValue(roomData)
+                            firebaseBuildingReference.child(roomData.primaryKey.toString()).setValue(roomData)
                         }
                     }
                 }
@@ -73,13 +73,13 @@ class DataBackupRepository (
                             for (roomData in roomDataList) {
                                 if (!snapshot.hasChild(roomData.id.toString())) {
                                     // ID number doesn't exist, save data
-                                    firebaseRoomReference.child(roomData.id.toString()).setValue(roomData)
+                                    firebaseRoomReference.child(roomData.primaryKey.toString()).setValue(roomData)
                                 }
                             }
                         } else {
                             // Firebase database is empty, save all data
                             roomDataList.forEach { roomData ->
-                                firebaseRoomReference.child(roomData.id.toString()).setValue(roomData)
+                                firebaseRoomReference.child(roomData.primaryKey.toString()).setValue(roomData)
                             }
                         }
                     }
@@ -108,7 +108,8 @@ class DataBackupRepository (
                 for (data in snapshot.children) {
                     val id = data.child("id").value.toString().toInt()
                     val name = data.child("name").value.toString()
-                    buildingDataList.add(BuildingData(id, name))
+                    val primaryKey = data.child("primaryKey").value.toString()
+                    buildingDataList.add(BuildingData(id, name, primaryKey))
                 }
 
                 println("Building data list: $buildingDataList")
@@ -135,7 +136,8 @@ class DataBackupRepository (
                     val customerDetails = data.child("customerDetails").value.toString() ?: ""
                     val entryDate = data.child("entryDate").value.toString().toLong() ?: 0
                     val exitDate = data.child("exitDate").value.toString().toLong() ?: 0
-                    roomDataList.add(RoomData(id, buildingId, roomBuildingName, floorNo, roomNo, bedType, isBooked, customerName, customerDetails, entryDate, exitDate))
+                    val primaryKey = data.child("primaryKey").value.toString() ?: ""
+                    roomDataList.add(RoomData(id, buildingId, roomBuildingName, floorNo, roomNo, bedType, isBooked, customerName, customerDetails, entryDate, exitDate, primaryKey))
                 }
 
                 println("Room data list: $roomDataList")

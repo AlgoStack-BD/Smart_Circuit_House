@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
+import androidx.room.PrimaryKey
 import androidx.room.Query
 import com.algostack.smartcircuithouse.services.model.BuildingData
 
@@ -15,8 +16,11 @@ interface BuildingDao {
     @Query("SELECT * FROM buildings")
     fun getAllBuildings(): LiveData<List<BuildingData>>
 
-    @Query("DELETE FROM buildings WHERE id = :buildingId")
-    suspend fun delete(buildingId: Int)
+//    @Query("DELETE FROM buildings WHERE id = :buildingId")
+//    suspend fun delete(buildingId: kotlin.Int)
+
+    @Query("DELETE FROM buildings WHERE primaryKey = :primaryKey")
+    suspend fun delete(primaryKey: String)
 
     @Query("SELECT * FROM buildings")
     suspend fun getAllBuildingsForBackup(): List<BuildingData>

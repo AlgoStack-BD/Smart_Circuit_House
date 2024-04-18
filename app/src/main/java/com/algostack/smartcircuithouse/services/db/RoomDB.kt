@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.algostack.smartcircuithouse.services.model.RoomData
 
-@Database(entities = [RoomData::class], version = 1, exportSchema = false)
+@Database(entities = [RoomData::class], version = 2, exportSchema = false)
 abstract class RoomDB : RoomDatabase() {
     abstract fun roomDao(): RoomDao
 

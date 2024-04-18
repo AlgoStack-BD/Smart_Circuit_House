@@ -49,6 +49,9 @@
             <argument
                 android:name="buildingId"
                 app:argType="integer" />
+            <argument
+                android:name="primaryKey"
+                app:argType="string" />
         </action>
         <action
             android:id="@+id/action_homeScreen_to_settingsScreen"
