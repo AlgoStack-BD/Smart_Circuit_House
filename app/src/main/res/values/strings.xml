@@ -40,6 +40,8 @@
     <string name="select_language">Select Language</string>
     <string name="english">English</string>
     <string name="bangla">Bangla</string>
+    <string name="add_team_member">Add Team Member</string>
+    <string name="log_out">Log Out</string>
 
 
     <string-array name="bed_types">

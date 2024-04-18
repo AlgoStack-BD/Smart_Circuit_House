@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.algostack.smartcircuithouse.R
 import com.algostack.smartcircuithouse.databinding.FragmentSettingsScreenBinding
 import com.algostack.smartcircuithouse.features.home_screen.model.DoubleViewModel
@@ -17,8 +18,10 @@ import com.algostack.smartcircuithouse.features.home_screen.model.DoubleViewMode
 import com.algostack.smartcircuithouse.features.room_screen.dialog.AddRoomBottomSheetDialog
 import com.algostack.smartcircuithouse.features.settings_screen.Model.SettingViewModelFactory
 import com.algostack.smartcircuithouse.features.settings_screen.language_change.LanguageChangeBottomSheetDialog
+import com.algostack.smartcircuithouse.features.settings_screen.team_member.AddTeamMemberBottomSheetDialog
 import com.algostack.smartcircuithouse.features.settings_screen.viewmodel.SettingViewModel
 import com.algostack.smartcircuithouse.services.db.RoomDB
+import com.algostack.smartcircuithouse.utils.TokenManager
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -87,6 +90,19 @@ class SettingsScreen : Fragment() {
 
             val bottomSheet = LanguageChangeBottomSheetDialog()
             bottomSheet.show(parentFragmentManager, bottomSheet.tag)
+        }
+
+
+        binding.addteammember.setOnClickListener {
+            val bottomSheet = AddTeamMemberBottomSheetDialog()
+            bottomSheet.show(parentFragmentManager,bottomSheet.tag)
+        }
+
+        binding.LogOutbtn.setOnClickListener {
+            firebaseAuth.signOut()
+            TokenManager(requireContext()).clearUid()
+           findNavController().navigate(R.id.action_settingsScreen_to_loginScreen)
+
         }
 
     }

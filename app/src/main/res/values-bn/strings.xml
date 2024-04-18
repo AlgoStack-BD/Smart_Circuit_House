@@ -4,44 +4,46 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="booked">Booked</string>
-    <string name="book_now">Book Now</string>
+    <string name="booked">বুক করা হয়েছে</string>
+    <string name="book_now">বুক করুন</string>
 
-    <string name="bed_type_hint">Bed Type</string>
+    <string name="bed_type_hint">বিছানার ধরণ</string>
     <string name="easy_way_to_book_your_room">সহজেই রুম বুক করুন</string>
     <string name="enjoy_your_time">রহস্যময় কেউ উপভোগ্য করে তুলুন</string>
     <string name="let_s_go">অগ্রসর হই</string>
     <string name="let_s_get_started">শুরু করা যাক</string>
 
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="log_in">Log in</string>
-    <string name="smart_circuit_house">Smart Circuit House</string>
-    <string name="total_items">Total items:</string>
-    <string name="profile">Profile</string>
-    <string name="sync_data">Sync Data</string>
-    <string name="backup">Backup</string>
-    <string name="about">About</string>
-    <string name="change_language">Change Language</string>
-    <string name="room_no">Room No</string>
-    <string name="floor_no">Floor No</string>
-    <string name="bed_type">Bed Type</string>
-    <string name="save">Save</string>
-    <string name="building_name">Building Name</string>
-    <string name="c_name">C. Name</string>
-    <string name="c_details">C. Details</string>
-    <string name="check_in">Check-in</string>
-    <string name="check_out">Check-out</string>
+    <string name="email">ইমেইল</string>
+    <string name="password">পাসওয়ার্ড</string>
+    <string name="log_in">লগ ইন</string>
+    <string name="smart_circuit_house">স্মার্ট সার্কিট হাউজ</string>
+    <string name="total_items">মোট আইটেম:</string>
+    <string name="profile">প্রোফাইল</string>
+    <string name="sync_data">ডেটা সিঙ্ক করুন</string>
+    <string name="backup">ব্যাকআপ</string>
+    <string name="about">আমাদের সম্পর্কে</string>
+    <string name="change_language">ভাষা পরিবর্তন করুন</string>
+    <string name="room_no">কক্ষ নং</string>
+    <string name="floor_no">ফ্লোর নং</string>
+    <string name="bed_type">বিছানার ধরণ</string>
+    <string name="save">সংরক্ষণ করুন</string>
+    <string name="building_name">বিল্ডিং এর নাম</string>
+    <string name="c_name">কাস্টমার. নাম</string>
+    <string name="c_details">কাস্টমার. বিবরণী</string>
+    <string name="check_in">চেক ইন</string>
+    <string name="check_out">চেক আউট</string>
     <string name="powered_by">Powered By</string>
     <string name="owned_by">Owned By</string>
     <string name="rangpur_dc_office">Rangpur DC Office</string>
     <string name="title">Title</string>
-    <string name="room_no_">Room No:</string>
-    <string name="floor_no_">Floor No:</string>
-    <string name="bed_type_">Bed Type:</string>
-    <string name="select_language">Select Language</string>
+    <string name="room_no_">কক্ষ নং:</string>
+    <string name="floor_no_">ফ্লোর নং:</string>
+    <string name="bed_type_">বিছানার ধরণ:</string>
+    <string name="select_language">ভাষা নির্বাচন করুন</string>
     <string name="english">English</string>
-    <string name="bangla">Bangla</string>
+    <string name="bangla">বাংলা</string>
+    <string name="add_team_member">টিম মেম্বার সংযুক্ত করুন</string>
+    <string name="log_out">লগ আউট</string>
 
 
 

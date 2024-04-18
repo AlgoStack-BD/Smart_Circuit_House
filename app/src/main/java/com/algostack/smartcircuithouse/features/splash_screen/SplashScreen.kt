@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.algostack.smartcircuithouse.R
 import com.algostack.smartcircuithouse.databinding.FragmentSplashScreenBinding
+import com.algostack.smartcircuithouse.utils.TokenManager
 
 class SplashScreen : Fragment() {
 
@@ -22,7 +23,15 @@ class SplashScreen : Fragment() {
     ): View? {
         _binding = FragmentSplashScreenBinding.inflate(inflater, container, false)
         Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(R.id.action_splashScreen_to_introScreen)
+
+            if (TokenManager(requireContext()).getUid() != null){
+                  findNavController().navigate(R.id.action_splashScreen_to_homeScreen)
+            }else{
+                findNavController().navigate(R.id.action_splashScreen_to_introScreen)
+            }
+
+
+
 
         }, 1500)
         return binding.root
