@@ -7,20 +7,46 @@
     android:background="@color/secondary"
     tools:context=".features.home_screen.tab_layout.InOutFragment">
 
-    <TextView
-        android:id="@+id/textViewTotalInOutItems"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/curved_shape"
-        android:fontFamily="@font/poppins_regular"
-        android:padding="8dp"
-        android:text="Total items:"
-        android:textColor="@android:color/black"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/imageViewFilterDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/ic_filter_list"
+            android:background="@drawable/curved_shape"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:padding="10dp"
+            android:contentDescription="Filter">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/textViewTotalInOutItems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/curved_shape"
+            android:fontFamily="@font/poppins_regular"
+            android:padding="8dp"
+            android:text="Total items:"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewInOut"
@@ -32,7 +58,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewTotalInOutItems"
+        app:layout_constraintTop_toBottomOf="@id/topBar"
         tools:listitem="@layout/user_info_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

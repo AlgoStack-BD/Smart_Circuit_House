@@ -1,9 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@color/white"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="5dp"
-    android:layout_height="wrap_content">
+    android:background="@color/white">
 
     <LinearLayout
         android:id="@+id/roomLayout"
@@ -12,9 +12,17 @@
         android:layout_margin="15dp"
         android:elevation="0dp"
         android:orientation="horizontal">
-
+        <!--        <Button
+                    android:id="@+id/roomBookNow"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/primary"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Booked"
+                    android:textColor="@color/white"
+                    app:cornerRadius="10dp" />-->
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/roomBookNow"
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:src="@drawable/bedroom" />
@@ -23,84 +31,108 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-            <TextView
-                android:id="@+id/buildingNameTextView"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
-                android:paddingStart="20dp"
-                android:text="B. Name" />
+                android:layout_weight="1.2"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/roomNumberTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
-                android:paddingStart="20dp"
-                android:text="R. Number" />
+                <TextView
+                    android:id="@+id/buildingNameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:paddingStart="20dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:text="B. Name" />
 
-            <TextView
-                android:id="@+id/floorNumberTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
-                android:paddingStart="20dp"
-                android:text="F. Number" />
+                <TextView
+                    android:id="@+id/roomNumberTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:paddingStart="20dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:text="R. Number" />
 
-            <TextView
-                android:id="@+id/bedTypeTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
-                android:paddingStart="20dp"
-                android:text="Bed Type" />
+                <TextView
+                    android:id="@+id/floorNumberTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/poppins_regular"
+                    android:paddingStart="20dp"
+                    android:text="F. Number" />
 
-            <TextView
-                android:id="@+id/nameTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
-                android:paddingStart="20dp"
-                android:text="C. Name" />
+                <TextView
+                    android:id="@+id/bedTypeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:paddingStart="20dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:text="Bed Type" />
 
-            <TextView
-                android:id="@+id/detailsTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
-                android:paddingStart="20dp"
-                android:text="C. Details" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/entryDateTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
-                android:paddingStart="20dp"
-                android:text="Check-in" />
 
-            <TextView
-                android:id="@+id/exitDateTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
-                android:paddingStart="20dp"
-                android:text="Check-out" />
+            <LinearLayout
+                android:id="@+id/expandableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/nameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:paddingStart="20dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:text="C. Name" />
+
+                <TextView
+                    android:id="@+id/detailsTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:paddingStart="20dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:text="C. Details" />
+
+                <TextView
+                    android:id="@+id/entryDateTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:paddingStart="20dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:text="Check-in" />
+
+                <TextView
+                    android:id="@+id/exitDateTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:paddingStart="20dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:text="Check-out" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-        <Button
-            android:id="@+id/roomBookNow"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/primary"
-            android:fontFamily="@font/poppins_regular"
-            android:text="Booked"
-            android:textColor="@color/white"
-            app:cornerRadius="10dp" />
 
     </LinearLayout>
 

@@ -27,6 +27,9 @@ interface RoomDao {
     @Query("UPDATE rooms SET isBooked = 0 WHERE id = :roomId")
     suspend fun cancelRoomBooking(roomId: Long)
 
+    @Query("UPDATE rooms SET isBooked = 0, customerName = null, customerDetails = null, entryDate = null, exitDate = null WHERE id = :roomId")
+    suspend fun cancelBooking(roomId: Long)
+
     @Query("SELECT * FROM rooms")
     fun getAllRooms(): LiveData<List<RoomData>>
 

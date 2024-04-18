@@ -32,7 +32,11 @@
             android:id="@+id/editTextCustomerDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/c_details"
+
+            android:hint="C. Details"
+            android:maxLines="1"
+            android:ellipsize="end"
+
             android:inputType="text"/>
 
     </com.google.android.material.textfield.TextInputLayout>

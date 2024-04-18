@@ -69,13 +69,15 @@ class RoomAdapter(
         private val onBookNowClickListener: OnBookNowClickListener,
         private val onDeleteClickListener: OnDeleteClickListener?
     ) : RecyclerView.ViewHolder(itemView) {
+        private val roomBuildingNameTextView: TextView = itemView.findViewById(R.id.textViewRoomBuildingName)
         private val roomNoTextView: TextView = itemView.findViewById(R.id.textViewRoomNo)
         private val bedTypeTextView: TextView = itemView.findViewById(R.id.textViewBedType)
         private val floorNoTextView: TextView = itemView.findViewById(R.id.textViewFloorNo)
         private val bookNowButton: Button = itemView.findViewById(R.id.roomBookNow)
 
         fun bind(roomData: RoomData) {
-            floorNoTextView.text = "Floor No:  " + roomData.floorNo.toString()
+            roomBuildingNameTextView.text = "Building: " + roomData.roomBuildingName
+            floorNoTextView.text = "Floor No:  " + roomData.floorNo
             roomNoTextView.text = "Room No: " + roomData.roomNo
             bedTypeTextView.text = "Bed Type: " + roomData.bedType
 

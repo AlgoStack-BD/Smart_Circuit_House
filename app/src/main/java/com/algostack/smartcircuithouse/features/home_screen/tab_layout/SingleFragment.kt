@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.algostack.smartcircuithouse.databinding.FragmentSingleBinding
 import com.algostack.smartcircuithouse.features.home_screen.model.SingleViewModelFactory
 import com.algostack.smartcircuithouse.features.home_screen.model.SingleViewModel
+import com.algostack.smartcircuithouse.features.room_screen.RoomScreen
 import com.algostack.smartcircuithouse.features.room_screen.adapter.RoomAdapter
 import com.algostack.smartcircuithouse.features.room_screen.dialog.BookingBottomSheetDialog
 import com.algostack.smartcircuithouse.services.model.RoomData
@@ -19,6 +20,7 @@ class SingleFragment : Fragment(), RoomAdapter.OnBookNowClickListener {
 
     private val viewModel: SingleViewModel by viewModels { SingleViewModelFactory(requireContext()) }
     private lateinit var binding: FragmentSingleBinding
+    private lateinit var roomScreen: RoomScreen
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +33,10 @@ class SingleFragment : Fragment(), RoomAdapter.OnBookNowClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val activity = RoomScreen()
+
+        roomScreen = activity
+
         val adapter = RoomAdapter(this, null)
         binding.recyclerViewSingleRooms.adapter = adapter
         binding.recyclerViewSingleRooms.layoutManager = LinearLayoutManager(requireContext())
@@ -42,8 +48,10 @@ class SingleFragment : Fragment(), RoomAdapter.OnBookNowClickListener {
     }
 
     override fun onBookNowClick(roomData: RoomData) {
+        /*viewModel.bookRoom(roomData)*/
         val bookingBottomSheetDialog = BookingBottomSheetDialog()
         bookingBottomSheetDialog.setSelectedRoom(roomData)
+        bookingBottomSheetDialog.setRoomScreen(roomScreen)
         bookingBottomSheetDialog.show(parentFragmentManager, "BookingBottomSheetDialog")
     }
 
