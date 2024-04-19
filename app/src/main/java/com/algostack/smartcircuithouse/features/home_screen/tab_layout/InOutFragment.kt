@@ -66,10 +66,19 @@ class InOutFragment : Fragment(), FilterByBottomSheetDialog.FilterListener {
 
 
         val textViewTotalInOutItems = view.findViewById<TextView>(R.id.textViewTotalInOutItems)
+        val textViewNoItems = view.findViewById<TextView>(R.id.textViewNoItems)
 
         viewModel.itemList.observe(viewLifecycleOwner, Observer { itemList ->
-            adapter.submitList(itemList)
-            textViewTotalInOutItems.text = "Total Items: ${itemList.size}"
+            if (itemList.isEmpty()) {
+                textViewNoItems.visibility = View.VISIBLE
+                recyclerView.visibility = View.GONE
+                textViewTotalInOutItems.text = "Total Items: ${itemList.size}"
+            } else {
+                textViewNoItems.visibility = View.GONE
+                adapter.submitList(itemList)
+                recyclerView.visibility = View.VISIBLE
+                textViewTotalInOutItems.text = "Total Items: ${itemList.size}"
+            }
         })
 
         return view

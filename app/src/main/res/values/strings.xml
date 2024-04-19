@@ -20,7 +20,7 @@
     <string name="sync_data">Sync</string>
     <string name="backup">Backup</string>
     <string name="about">About</string>
-    <string name="change_language">Change Language</string>
+    <string name="change_language">Language</string>
     <string name="room_no">Room No</string>
     <string name="floor_no">Floor No</string>
     <string name="bed_type">Bed Type</string>

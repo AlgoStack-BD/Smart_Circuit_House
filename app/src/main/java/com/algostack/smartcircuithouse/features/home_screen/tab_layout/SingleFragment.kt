@@ -42,8 +42,16 @@ class SingleFragment : Fragment(), RoomAdapter.OnBookNowClickListener {
         binding.recyclerViewSingleRooms.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.getSingleRooms().observe(viewLifecycleOwner, Observer { rooms ->
-            adapter.submitList(rooms)
-            binding.textViewTotalSingleItems.text = "Total Items: ${rooms.size}"
+            if (rooms.isEmpty()) {
+                binding.textViewNoItems.visibility = View.VISIBLE
+                binding.recyclerViewSingleRooms.visibility = View.GONE
+                binding.textViewTotalSingleItems.text = "Total Items: ${rooms.size}"
+            } else {
+                binding.textViewNoItems.visibility = View.GONE
+                binding.recyclerViewSingleRooms.visibility = View.VISIBLE
+                adapter.submitList(rooms)
+                binding.textViewTotalSingleItems.text = "Total Items: ${rooms.size}"
+            }
         })
     }
 

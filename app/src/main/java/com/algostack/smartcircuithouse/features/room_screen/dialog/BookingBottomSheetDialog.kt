@@ -75,7 +75,8 @@ class BookingBottomSheetDialog : BottomSheetDialogFragment() {
     private fun handleRoomBooking() {
 
         if (!::roomScreen.isInitialized) {
-            Toast.makeText(requireContext(), "roomScreen is not initialized", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "roomScreen is not initialized", Toast.LENGTH_SHORT)
+                .show()
             return
         }
 
@@ -96,13 +97,16 @@ class BookingBottomSheetDialog : BottomSheetDialogFragment() {
 
         if (enterDate.isNullOrEmpty()) {
             enterDateEditText.error = "Enter date is required"
+            Toast.makeText(requireContext(), "Enter date is required", Toast.LENGTH_SHORT).show()
             return
         }
 
         if (exitDate.isNullOrEmpty()) {
             exitDateEditText.error = "Exit date is required"
+            Toast.makeText(requireContext(), "Exit date is required", Toast.LENGTH_SHORT).show()
             return
         }
+
 
         selectedRoom.isBooked = true
         selectedRoom.customerName = customerName

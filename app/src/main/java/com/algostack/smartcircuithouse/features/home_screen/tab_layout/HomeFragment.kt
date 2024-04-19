@@ -44,6 +44,7 @@ class HomeFragment : Fragment(), BuildingAdapter.OnItemClickListener {
         buildingDao.getAllBuildings().observe(viewLifecycleOwner, Observer { buildings ->
 
             if (buildings.isEmpty()) {
+                binding.textViewNoItems.visibility = View.VISIBLE
                 binding.homeProgressBar.visibility = View.GONE
                 binding.textViewTotalBuildingItems.text = "Total Items: ${buildings.size}"
             } else {

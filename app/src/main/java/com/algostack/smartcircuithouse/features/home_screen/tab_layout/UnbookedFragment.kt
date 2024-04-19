@@ -42,8 +42,17 @@ class UnbookedFragment : Fragment(), RoomAdapter.OnBookNowClickListener {
         binding.recyclerViewUnbookedRooms.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.getUnbookedRooms().observe(viewLifecycleOwner, Observer { rooms ->
-            adapter.submitList(rooms)
-            binding.textViewTotalUnbookedItems.text = "Total Items: ${rooms.size}"
+            if (rooms.isEmpty()) {
+                binding.textViewNoItems.visibility = View.VISIBLE
+                binding.recyclerViewUnbookedRooms.visibility = View.GONE
+                binding.textViewTotalUnbookedItems.text = "Total Items: ${rooms.size}"
+            } else {
+                binding.textViewNoItems.visibility = View.GONE
+                binding.recyclerViewUnbookedRooms.visibility = View.VISIBLE
+                adapter.submitList(rooms)
+                binding.textViewTotalUnbookedItems.text = "Total Items: ${rooms.size}"
+            }
+
         })
     }
 
