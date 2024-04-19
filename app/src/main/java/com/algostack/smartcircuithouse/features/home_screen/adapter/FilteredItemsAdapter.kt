@@ -34,24 +34,22 @@ class FilteredItemsAdapter(private val itemList: List<Item>) :
         private val roomNumberTextView: TextView = itemView.findViewById(R.id.roomNumberTextView)
         private val floorNumberTextView: TextView = itemView.findViewById(R.id.floorNumberTextView)
         private val bedTypeTextView: TextView = itemView.findViewById(R.id.bedTypeTextView)
-        private val roomBookNowButton: ImageView = itemView.findViewById(R.id.roomBookNow)
 
-        private val expandableLayout: LinearLayout = itemView.findViewById(R.id.expandableLayout)
         private val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
         private val detailsTextView: TextView = itemView.findViewById(R.id.detailsTextView)
         private val entryDateTextView: TextView = itemView.findViewById(R.id.entryDateTextView)
         private val exitDateTextView: TextView = itemView.findViewById(R.id.exitDateTextView)
 
         fun bind(item: Item) {
-            buildingNameTextView.text = "Building: " + item.roomBuildingName
-            roomNumberTextView.text = "Floor No: " + item.roomNumber
-            floorNumberTextView.text = "Room No: " + item.floorNumber
-            bedTypeTextView.text = "Bed Type: " + item.bedType
+            buildingNameTextView.text = item.roomBuildingName
+            roomNumberTextView.text = item.roomNumber
+            floorNumberTextView.text = item.floorNumber
+            bedTypeTextView.text = item.bedType
 
-            nameTextView.text = "C. Name: " + item.name
-            detailsTextView.text = "C. Details: " + item.details
-            entryDateTextView.text = "Check-in: " + item.entryDate
-            exitDateTextView.text = "Check-out: " + item.exitDate
+            nameTextView.text = item.name
+            detailsTextView.text = item.details
+            entryDateTextView.text = item.entryDate
+            exitDateTextView.text = item.exitDate
 
         }
     }

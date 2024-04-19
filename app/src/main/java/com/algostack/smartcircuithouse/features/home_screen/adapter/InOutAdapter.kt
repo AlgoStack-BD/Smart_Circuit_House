@@ -88,21 +88,21 @@ class InOutAdapter(private val viewModel: InOutViewModel) :
                 .inflate(R.layout.dialog_item_details, null)
 
             dialogView.findViewById<TextView>(R.id.buildingNameTextView)
-                .text = "Building: " + item.roomBuildingName
+                .text = item.roomBuildingName
             dialogView.findViewById<TextView>(R.id.roomNumberTextView)
-                .text = "Floor No: " + item.roomNumber
+                .text = item.roomNumber
             dialogView.findViewById<TextView>(R.id.floorNumberTextView)
-                .text = "Room No: " + item.floorNumber
+                .text = item.floorNumber
             dialogView.findViewById<TextView>(R.id.bedTypeTextView)
-                .text = "Bed Type: " + item.bedType
+                .text = item.bedType
             dialogView.findViewById<TextView>(R.id.nameTextView)
-                .text = "C. Name: " + item.name
+                .text = item.name
             dialogView.findViewById<TextView>(R.id.detailsTextView)
-                .text = "C. Details: " + item.details
+                .text = item.details
             dialogView.findViewById<TextView>(R.id.entryDateTextView)
-                .text = "Check-in: " + item.entryDate
+                .text = item.entryDate
             dialogView.findViewById<TextView>(R.id.exitDateTextView)
-                .text = "Check-out: " + item.exitDate
+                .text = item.exitDate
 
             AlertDialog.Builder(itemView.context)
                 .setView(dialogView)
@@ -111,10 +111,10 @@ class InOutAdapter(private val viewModel: InOutViewModel) :
         }
 
         fun bind(item: Item) {
-            buildingNameTextView.text = "Building: " + item.roomBuildingName
-            roomNumberTextView.text = "Floor No: " + item.roomNumber
-            floorNumberTextView.text = "Room No: " + item.floorNumber
-            bedTypeTextView.text = "Bed Type: " + item.bedType
+            buildingNameTextView.text = item.roomBuildingName
+            roomNumberTextView.text = item.roomNumber
+            floorNumberTextView.text = item.floorNumber
+            bedTypeTextView.text = item.bedType
         }
     }
 
