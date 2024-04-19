@@ -52,7 +52,8 @@
         </action>
         <action
             android:id="@+id/action_homeScreen_to_settingsScreen"
-            app:destination="@id/settingsScreen" />
+            app:destination="@id/settingsScreen"
+            app:enterAnim="@anim/fall_up" />
     </fragment>
 
 
@@ -89,7 +90,8 @@
     <fragment
         android:id="@+id/settingsScreen"
         android:name="com.algostack.smartcircuithouse.features.settings_screen.SettingsScreen"
-        android:label="SettingsScreen" >
+        android:label="SettingsScreen"
+        tools:layout="@layout/fragment_settings_screen">
         <action
             android:id="@+id/action_settingsScreen_to_loginScreen"
             app:destination="@id/loginScreen"

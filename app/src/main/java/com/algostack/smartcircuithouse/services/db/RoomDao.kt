@@ -13,16 +13,32 @@ interface RoomDao {
     @Insert
     suspend fun insert(roomData: RoomData)
 
-
-
     @Update
     suspend fun updateRoom(roomData: RoomData)
 
     @Query("SELECT * FROM rooms")
     suspend fun getAllRoomDataForBackup(): List<RoomData>
 
+    @Query("SELECT * FROM rooms WHERE roomNo = :roomNo AND floorNo = :floorNo AND roomBuildingName = :buildingName")
+    suspend fun getRoomByNumberAndFloorAndBuilding(
+        roomNo: String,
+        floorNo: String,
+        buildingName: String
+    ): RoomData?
+
+
+    @Query("DELETE FROM rooms WHERE buildingId = :buildingId")
+    suspend fun deleteRoomsForBuilding(buildingId: Int)
+
     @Query("UPDATE rooms SET buildingId = :buildingId, roomBuildingName = :buildingName, floorNo = :floorNumber, roomNo = :roomNumber, bedType = :bedType WHERE id = :roomId")
-    suspend fun updateRoomDetails(roomId: Long, buildingId: Int, buildingName: String, floorNumber: kotlin.String, roomNumber: String, bedType: String)
+    suspend fun updateRoomDetails(
+        roomId: Long,
+        buildingId: Int,
+        buildingName: String,
+        floorNumber: kotlin.String,
+        roomNumber: String,
+        bedType: String
+    )
 
     @Query("UPDATE rooms SET isBooked = 0 WHERE id = :roomId")
     suspend fun cancelRoomBooking(roomId: Long)
@@ -60,7 +76,6 @@ interface RoomDao {
 
     @Delete
     suspend fun delete(roomData: RoomData)
-
 
 }
 

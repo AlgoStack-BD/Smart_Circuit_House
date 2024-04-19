@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.algostack.smartcircuithouse.R
 import com.algostack.smartcircuithouse.features.home_screen.model.BuildingData
 import com.algostack.smartcircuithouse.services.db.BuildingDB
+import com.algostack.smartcircuithouse.services.db.RoomDB
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -86,11 +87,16 @@ class BuildingAdapter(private val itemClickListener: OnItemClickListener) :
         private fun deleteItem(item: BuildingData) {
             val context = itemView.context
             val buildingDao = BuildingDB.getDatabase(context).buildingDao()
+            val roomDao = RoomDB.getDatabase(context).roomDao()
+
             CoroutineScope(Dispatchers.IO).launch {
+                roomDao.deleteRoomsForBuilding(item.id)
+
                 buildingDao.delete(item.id)
             }
-            showSnackbar(itemView, "Building deleted successfully")
+            showSnackbar(itemView, "Building and associated rooms deleted successfully")
         }
+
 
         private fun showSnackbar(view: View, message: String) {
             Snackbar.make(view, message, Snackbar.LENGTH_SHORT)

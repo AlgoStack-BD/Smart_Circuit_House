@@ -69,7 +69,8 @@ class RoomAdapter(
         private val onBookNowClickListener: OnBookNowClickListener,
         private val onDeleteClickListener: OnDeleteClickListener?
     ) : RecyclerView.ViewHolder(itemView) {
-        private val roomBuildingNameTextView: TextView = itemView.findViewById(R.id.textViewRoomBuildingName)
+        private val roomBuildingNameTextView: TextView =
+            itemView.findViewById(R.id.textViewRoomBuildingName)
         private val roomNoTextView: TextView = itemView.findViewById(R.id.textViewRoomNo)
         private val bedTypeTextView: TextView = itemView.findViewById(R.id.textViewBedType)
         private val floorNoTextView: TextView = itemView.findViewById(R.id.textViewFloorNo)
@@ -83,10 +84,10 @@ class RoomAdapter(
 
             if (roomData.isBooked) {
                 bookNowButton.text = itemView.context.getString(R.string.booked)
-                bookNowButton.setBackgroundColor(itemView.context.getColor(R.color.primary))
+                bookNowButton.setBackgroundColor(itemView.context.getColor(R.color.red))
             } else {
                 bookNowButton.text = itemView.context.getString(R.string.book_now)
-                bookNowButton.setBackgroundColor(itemView.context.getColor(R.color.green))
+                bookNowButton.setBackgroundColor(itemView.context.getColor(R.color.primary))
             }
 
             bookNowButton.setOnClickListener {

@@ -16,14 +16,15 @@ import com.algostack.smartcircuithouse.features.home_screen.tab_layout.InOutFrag
 import com.algostack.smartcircuithouse.features.home_screen.tab_layout.SingleFragment
 import com.algostack.smartcircuithouse.features.home_screen.tab_layout.UnbookedFragment
 
-class TabPagerAdapter(private val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class TabPagerAdapter(private val context: Context, fm: FragmentManager) :
+    FragmentPagerAdapter(fm) {
 
-    private val tabTitles = arrayOf("Home", "Single", "Double", "In & Out", "Booked", "Unbooked")
+    private val tabTitles = arrayOf("Home", "Single", "Double", "Booked", /*"Booked",*/ "Unbooked")
     private val tabIcons = intArrayOf(
         R.drawable.ic_home,
-        R.drawable.ic_home,
-        R.drawable.ic_home,
-        R.drawable.ic_home,
+        R.drawable.ic_single_bed,
+        R.drawable.ic_double_bed,
+        /*  R.drawable.ic_home,*/
         R.drawable.ic_booked,
         R.drawable.ic_unbooked
     )
@@ -34,14 +35,14 @@ class TabPagerAdapter(private val context: Context, fm: FragmentManager) : Fragm
             1 -> SingleFragment()
             2 -> DoubleFragment()
             3 -> InOutFragment()
-            4 -> BookedFragment()
-            5 -> UnbookedFragment()
+            /* 4 -> BookedFragment()*/
+            4 -> UnbookedFragment()
             else -> throw IllegalArgumentException("Invalid position")
         }
     }
 
     override fun getCount(): Int {
-        return 6
+        return 5
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
@@ -49,7 +50,7 @@ class TabPagerAdapter(private val context: Context, fm: FragmentManager) : Fragm
         drawable?.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
 
         val spannableStringBuilder = SpannableStringBuilder()
-        spannableStringBuilder.append("  ") // Add some padding between icon and text
+        spannableStringBuilder.append("  ")
         drawable?.let {
             val imageSpan = ImageSpan(it, ImageSpan.ALIGN_BASELINE)
             spannableStringBuilder.setSpan(
@@ -59,7 +60,7 @@ class TabPagerAdapter(private val context: Context, fm: FragmentManager) : Fragm
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )
         }
-        spannableStringBuilder.append("\n") // Add a newline for spacing
+        spannableStringBuilder.append("\n")
         spannableStringBuilder.append(tabTitles[position])
 
         return spannableStringBuilder

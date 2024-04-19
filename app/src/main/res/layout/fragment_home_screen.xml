@@ -50,7 +50,6 @@
         app:tabMode="scrollable"
         app:tabGravity="center"
         app:tabRippleColor="@color/primary"
-
         app:tabSelectedTextColor="@color/primary" />
 
     <androidx.viewpager.widget.ViewPager
