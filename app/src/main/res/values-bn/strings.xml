@@ -32,9 +32,7 @@
     <string name="c_details">কাস্টমার. বিবরণী</string>
     <string name="check_in">চেক ইন</string>
     <string name="check_out">চেক আউট</string>
-    <string name="powered_by">Powered By</string>
     <string name="owned_by">Owned By</string>
-    <string name="rangpur_dc_office">Rangpur DC Office</string>
     <string name="title">Title</string>
     <string name="room_no_">কক্ষ নং:</string>
     <string name="floor_no_">ফ্লোর নং:</string>
@@ -44,6 +42,14 @@
     <string name="bangla">বাংলা</string>
     <string name="add_team_member">টিম মেম্বার সংযুক্ত করুন</string>
     <string name="log_out">লগ আউট</string>
+
+    <string name="version">ভার্শন 1.0</string>
+    <string name="developed_by">Developed by</string>
+    <string name="AlgoStackBD">AlgoStack-BD</string>
+    <string name="powered_by">Powered by</string>
+    <string name="rangpur_dc_office">জেলা প্রশাসকের কার্যালয়, রংপুর</string>
+    <string name="account_in">একাউন্টের তথ্য</string>
+    <string name="Settings" >সেটিংস</string>
 
 
 

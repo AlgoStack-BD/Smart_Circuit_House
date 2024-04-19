@@ -39,7 +39,7 @@ class RoomViewModel(private val repository: RoomRepository) : ViewModel() {
         }
     }
 
-    fun bookRoom(roomData: RoomData, buildingId: Int, buildingName: String, floorNumber: String, roomNumber: String, bedType: String) {
+    fun bookRoom(roomData: RoomData, buildingId: String, buildingName: String, floorNumber: String, roomNumber: String, bedType: String) {
         viewModelScope.launch {
             repository.updateRoomDetails(roomData.id, buildingId, buildingName, floorNumber, roomNumber, bedType)
 

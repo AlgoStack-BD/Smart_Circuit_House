@@ -27,7 +27,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:fontFamily="@font/poppins_light"
         android:textSize="12sp"
-        android:text="@string/owned_by"/>
+        android:textStyle="bold"
+        android:text="@string/powered_by"/>
 
     <TextView
         android:id="@+id/tvCompanyName"
@@ -50,7 +51,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:fontFamily="@font/poppins_light"
         android:textSize="12sp"
-        android:text="@string/powered_by"/>
+        android:textStyle="bold"
+        android:text="@string/developed_by"/>
 
     <TextView
         android:layout_width="wrap_content"

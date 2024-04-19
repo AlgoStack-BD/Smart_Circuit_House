@@ -67,7 +67,7 @@ class HomeFragment : Fragment(), BuildingAdapter.OnItemClickListener {
         _binding = null
     }
 
-    override fun onItemClick(title: String, buildingId: Int, primaryKey: String) {
+    override fun onItemClick(title: String, buildingId: String, primaryKey: String) {
         val action = HomeScreenDirections.actionHomeScreenToRoomScreen(
             title,
             buildingId,

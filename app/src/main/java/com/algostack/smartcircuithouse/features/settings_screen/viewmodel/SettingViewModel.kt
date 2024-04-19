@@ -21,24 +21,20 @@ class SettingViewModel  (private val context: Context) : ViewModel() {
     }
 
 
-    suspend fun buildingDataBackup(){
+    suspend fun getAllDataForBackup(context: Context){
         viewModelScope.launch {
-            dataBackupRepository.getAllBuildingsForBackup()
+            dataBackupRepository.getAllDataForBackup(context)
 
         }
 
 
     }
 
-    suspend fun roomDataBackup(){
-        viewModelScope.launch {
-            dataBackupRepository.getAllRoomDataForBackup()
-        }
-    }
 
-    suspend fun syncData(){
+
+    suspend fun syncData(context: Context){
         viewModelScope.launch {
-            dataBackupRepository.syncDataFromServer()
+            dataBackupRepository.syncDataFromServer(context)
         }
     }
 

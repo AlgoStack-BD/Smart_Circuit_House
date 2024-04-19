@@ -5,12 +5,12 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "rooms")
 data class RoomData(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
+    @PrimaryKey(autoGenerate = false)
+    val id: String =  "room"+(1..6).map { ('a'..'z').random() }.joinToString("") + (1..9).map { (0..6).random() }.joinToString(""),
     val roomNo: String,
     val bedType: String,
     val floorNo: String,
-    val buildingId: Int,
+    val buildingId: String,
     val roomBuildingName: String,
     var isBooked: Boolean = false,
     var customerName: String? = "",

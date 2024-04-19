@@ -19,7 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class AddRoomBottomSheetDialog(private val roomDao: RoomDao, private val buildingId: Int, private val buildingName: String, private val buildingPrimaryKey: String) :
+class AddRoomBottomSheetDialog(private val roomDao: RoomDao, private val buildingId: String, private val buildingName: String, private val buildingPrimaryKey: String) :
 
     BottomSheetDialogFragment() {
 

@@ -49,7 +49,7 @@ class InOutViewModel(private val roomRepository: RoomRepository) : ViewModel() {
         }
     }
 
-    fun cancelBooking(roomId: Long) {
+    fun cancelBooking(roomId: String) {
         viewModelScope.launch {
             roomRepository.cancelBooking(roomId)
         }
