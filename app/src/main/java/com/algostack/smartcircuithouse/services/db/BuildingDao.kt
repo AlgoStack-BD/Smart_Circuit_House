@@ -30,7 +30,7 @@ interface BuildingDao {
     suspend fun getAllBuildingsForBackup(): List<BuildingData>
 
     @Query("SELECT * FROM buildings WHERE id = :buildingId")
-    suspend fun getBuildingById(buildingId: Int): BuildingData
+    suspend fun getBuildingById(buildingId: String): BuildingData
 
 
 }

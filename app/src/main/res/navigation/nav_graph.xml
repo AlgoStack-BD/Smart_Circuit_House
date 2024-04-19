@@ -47,7 +47,7 @@
                 app:argType="string" />
             <argument
                 android:name="buildingId"
-                app:argType="integer" />
+                app:argType="string" />
             <argument
                 android:name="primaryKey"
                 app:argType="string" />
@@ -87,7 +87,7 @@
             app:nullable="true" />
         <argument
             android:name="buildingId"
-            app:argType="integer" />
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/settingsScreen"
@@ -97,7 +97,7 @@
         <action
             android:id="@+id/action_settingsScreen_to_loginScreen"
             app:destination="@id/loginScreen"
-            app:popUpTo="@id/settingsScreen"
+            app:popUpTo="@id/homeScreen"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>

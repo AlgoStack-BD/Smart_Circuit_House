@@ -63,7 +63,7 @@ class SettingsScreen : Fragment() {
             if (currentUser != null) {
                 //get current login email
                 val email = currentUser.email
-                binding.userEmail.text = email
+                binding.demoMail.text = email
             }
         }
 
@@ -74,8 +74,7 @@ class SettingsScreen : Fragment() {
             // impliment bcakaground task to backup data
 
             CoroutineScope(Dispatchers.Main).launch {
-                settingViewModel.buildingDataBackup()
-                settingViewModel.roomDataBackup()
+                settingViewModel.getAllDataForBackup(requireContext())
             }
 
         }
@@ -83,7 +82,7 @@ class SettingsScreen : Fragment() {
 
         binding.SyncData.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
-                settingViewModel.syncData()
+                settingViewModel.syncData(requireContext())
             }
         }
 

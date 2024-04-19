@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.algostack.smartcircuithouse.services.model.BuildingData
 
-@Database(entities = [BuildingData::class], version = 2, exportSchema = false)
+@Database(entities = [BuildingData::class], version = 3, exportSchema = false)
 abstract class BuildingDB : RoomDatabase() {
 
     abstract fun buildingDao(): BuildingDao

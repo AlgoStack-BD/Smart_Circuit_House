@@ -28,13 +28,13 @@ interface RoomDao {
     ): RoomData?
 
 
-    @Query("DELETE FROM rooms WHERE buildingId = :buildingId")
-    suspend fun deleteRoomsForBuilding(buildingId: Int)
+    @Query("DELETE FROM rooms WHERE primaryKey = :primaryKey")
+    suspend fun deleteRoomsForBuilding(primaryKey: String)
 
     @Query("UPDATE rooms SET buildingId = :buildingId, roomBuildingName = :buildingName, floorNo = :floorNumber, roomNo = :roomNumber, bedType = :bedType WHERE id = :roomId")
     suspend fun updateRoomDetails(
-        roomId: Long,
-        buildingId: Int,
+        roomId: String,
+        buildingId: String,
         buildingName: String,
         floorNumber: kotlin.String,
         roomNumber: String,
@@ -42,10 +42,10 @@ interface RoomDao {
     )
 
     @Query("UPDATE rooms SET isBooked = 0 WHERE id = :roomId")
-    suspend fun cancelRoomBooking(roomId: Long)
+    suspend fun cancelRoomBooking(roomId: String)
 
     @Query("UPDATE rooms SET isBooked = 0, customerName = null, customerDetails = null, entryDate = null, exitDate = null WHERE id = :roomId")
-    suspend fun cancelBooking(roomId: Long)
+    suspend fun cancelBooking(roomId: kotlin.String)
 
     @Query("SELECT * FROM rooms")
     fun getAllRooms(): LiveData<List<RoomData>>

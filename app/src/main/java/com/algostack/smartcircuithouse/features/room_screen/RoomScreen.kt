@@ -52,7 +52,7 @@ class RoomScreen : Fragment(), RoomAdapter.OnBookNowClickListener, RoomAdapter.O
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val buildingId = arguments?.getInt("buildingId") ?: -1
+        val buildingId = arguments?.getString("buildingId") ?: "-1"
         val buildingName = arguments?.getString("title") ?: "Default Building Name"
         val buildingPrimaryKey = arguments?.getString("primaryKey") ?: "Default Primary Key"
 

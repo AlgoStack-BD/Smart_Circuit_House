@@ -19,7 +19,7 @@ class RoomRepository(private val roomDao: RoomDao) {
         roomDao.updateRoom(roomData)
     }
 
-    suspend fun updateRoomDetails(roomId: Long, buildingId: Int, buildingName: String, floorNumber: String, roomNumber: String, bedType: String) {
+    suspend fun updateRoomDetails(roomId: String, buildingId: String, buildingName: String, floorNumber: String, roomNumber: String, bedType: String) {
         roomDao.updateRoomDetails(roomId, buildingId, buildingName, floorNumber, roomNumber, bedType)
     }
 
@@ -27,7 +27,7 @@ class RoomRepository(private val roomDao: RoomDao) {
         roomDao.cancelRoomBooking(roomData.id)
     }
 
-    suspend fun cancelBooking(roomId: Long) {
+    suspend fun cancelBooking(roomId: String) {
         roomDao.cancelBooking(roomId)
     }
 

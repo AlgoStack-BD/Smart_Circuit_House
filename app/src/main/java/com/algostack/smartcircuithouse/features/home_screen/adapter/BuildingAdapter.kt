@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 class BuildingAdapter(private val itemClickListener: OnItemClickListener) :
     ListAdapter<BuildingData, BuildingAdapter.CardViewHolder>(DiffCallback) {
     interface OnItemClickListener {
-        fun onItemClick(title: String, buildingId: Int, primaryKey: String)
+        fun onItemClick(title: String, buildingId: String, primaryKey: String)
     }
 
     companion object {
@@ -90,9 +90,9 @@ class BuildingAdapter(private val itemClickListener: OnItemClickListener) :
 
             CoroutineScope(Dispatchers.IO).launch {
 
-                roomDao.deleteRoomsForBuilding(item.id)
+                roomDao.deleteRoomsForBuilding(item.primaryKey)
 
-                buildingDao.delete(item.id)
+                buildingDao.delete(item.primaryKey)
 
             }
             showSnackbar(itemView, "Building and associated rooms deleted successfully")
