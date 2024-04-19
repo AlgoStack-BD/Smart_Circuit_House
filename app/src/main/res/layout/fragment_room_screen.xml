@@ -25,6 +25,18 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
+        android:id="@+id/textViewNoItems"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_light"
+        android:text="No items, please create a room"
+        android:textColor="@color/primary"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+
+    <TextView
         android:id="@+id/textViewTotalRoomItems"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

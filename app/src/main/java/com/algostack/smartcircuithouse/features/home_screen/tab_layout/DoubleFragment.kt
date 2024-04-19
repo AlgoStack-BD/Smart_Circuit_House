@@ -41,8 +41,16 @@ class DoubleFragment : Fragment(), RoomAdapter.OnBookNowClickListener {
         binding.recyclerViewDoubleRooms.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.getDoubleRooms().observe(viewLifecycleOwner, Observer { rooms ->
-            adapter.submitList(rooms)
-            binding.textViewTotalDoubleItems.text = "Total Items: ${rooms.size}"
+            if (rooms.isEmpty()) {
+                binding.textViewNoItems.visibility = View.VISIBLE
+                binding.recyclerViewDoubleRooms.visibility = View.GONE
+                binding.textViewTotalDoubleItems.text = "Total Items: ${rooms.size}"
+            } else {
+                binding.textViewNoItems.visibility = View.GONE
+                binding.recyclerViewDoubleRooms.visibility = View.VISIBLE
+                adapter.submitList(rooms)
+                binding.textViewTotalDoubleItems.text = "Total Items: ${rooms.size}"
+            }
 
         })
     }

@@ -77,10 +77,10 @@ class RoomAdapter(
         private val bookNowButton: Button = itemView.findViewById(R.id.roomBookNow)
 
         fun bind(roomData: RoomData) {
-            roomBuildingNameTextView.text = "Building: " + roomData.roomBuildingName
-            floorNoTextView.text = "Floor No:  " + roomData.floorNo
-            roomNoTextView.text = "Room No: " + roomData.roomNo
-            bedTypeTextView.text = "Bed Type: " + roomData.bedType
+            roomBuildingNameTextView.text = roomData.roomBuildingName
+            floorNoTextView.text = roomData.floorNo
+            roomNoTextView.text = roomData.roomNo
+            bedTypeTextView.text = roomData.bedType
 
             if (roomData.isBooked) {
                 bookNowButton.text = itemView.context.getString(R.string.booked)

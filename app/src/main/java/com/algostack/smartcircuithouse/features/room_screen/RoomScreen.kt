@@ -73,8 +73,11 @@ class RoomScreen : Fragment(), RoomAdapter.OnBookNowClickListener, RoomAdapter.O
         viewModel.getRoomsForBuilding(buildingPrimaryKey).observe(viewLifecycleOwner) { rooms ->
             if (rooms.isEmpty()) {
                 progressBar.visibility = View.GONE
+                binding.textViewNoItems.visibility = View.VISIBLE
                 binding.textViewTotalRoomItems.text = "Total Items: ${rooms.size}"
+
             } else {
+                binding.textViewNoItems.visibility = View.GONE
                 progressBar.visibility = View.GONE
                 adapter.submitList(rooms)
                 binding.textViewTotalRoomItems.text = "Total Items: ${rooms.size}"

@@ -63,7 +63,7 @@ class BuildingAdapter(private val itemClickListener: OnItemClickListener) :
             textViewTitle.text = item.title
 
             itemView.setOnClickListener {
-                itemClickListener.onItemClick(item.title, item.id ,item.primaryKey)
+                itemClickListener.onItemClick(item.title, item.id, item.primaryKey)
             }
 
             itemView.setOnLongClickListener {

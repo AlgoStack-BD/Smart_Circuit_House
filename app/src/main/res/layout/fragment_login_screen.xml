@@ -15,11 +15,11 @@
 
         <ImageView
             android:id="@+id/icClose"
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="20dp"
             android:src="@drawable/ic_close"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -90,7 +90,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/buttonLoginWithEmailPassword"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_margin="10dp"
             android:layout_marginTop="25dp"
             android:backgroundTint="@color/primary"
@@ -100,19 +100,18 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tvLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/log_in"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     android:visibility="visible" />
 
 
@@ -120,11 +119,10 @@
                     android:id="@+id/spin_kit"
                     style="@style/SpinKitView.Large.ThreeBounce"
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
+                    android:layout_height="10dp"
                     android:layout_gravity="center"
                     android:visibility="invisible"
                     app:SpinKit_Color="@color/white" />
-
 
             </LinearLayout>
 

@@ -2,13 +2,14 @@ package com.algostack.smartcircuithouse.features.home_screen.adapter
 
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -21,7 +22,6 @@ import java.util.*
 class InOutAdapter(private val viewModel: InOutViewModel) :
     ListAdapter<Item, InOutAdapter.ItemViewHolder>(ItemDiffCallback()) {
 
-    private var expandedPosition = RecyclerView.NO_POSITION
     private val handler = Handler(Looper.getMainLooper())
 
     init {
@@ -36,48 +36,38 @@ class InOutAdapter(private val viewModel: InOutViewModel) :
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, position == expandedPosition)
+        holder.bind(item)
 
         holder.itemView.startAnimation(
             AnimationUtils.loadAnimation(holder.itemView.context, R.anim.fall_down)
         )
     }
 
+
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val buildingNameTextView: TextView =
-            itemView.findViewById(R.id.buildingNameTextView)
-        private val roomNumberTextView: TextView = itemView.findViewById(R.id.roomNumberTextView)
-        private val floorNumberTextView: TextView = itemView.findViewById(R.id.floorNumberTextView)
-        private val bedTypeTextView: TextView = itemView.findViewById(R.id.bedTypeTextView)
+            itemView.findViewById(R.id.userDetailsBuildingName)
+        private val roomNumberTextView: TextView =
+            itemView.findViewById(R.id.userDetailsroomNumberTextView)
+        private val floorNumberTextView: TextView =
+            itemView.findViewById(R.id.userDetailsfloorNumberTextView)
+        private val bedTypeTextView: TextView =
+            itemView.findViewById(R.id.userDetailsbedTypeTextView)
         private val roomBookNowButton: ImageView = itemView.findViewById(R.id.roomBookNow)
-
-        private val expandableLayout: LinearLayout = itemView.findViewById(R.id.expandableLayout)
-        private val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
-        private val detailsTextView: TextView = itemView.findViewById(R.id.detailsTextView)
-        private val entryDateTextView: TextView = itemView.findViewById(R.id.entryDateTextView)
-        private val exitDateTextView: TextView = itemView.findViewById(R.id.exitDateTextView)
 
         init {
             itemView.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    if (position == expandedPosition) {
-                        expandedPosition = RecyclerView.NO_POSITION
-                        notifyItemChanged(position)
-                    } else {
-                        val previouslyExpandedPosition = expandedPosition
-                        expandedPosition = position
-                        notifyItemChanged(previouslyExpandedPosition)
-                        notifyItemChanged(expandedPosition)
-                    }
+                    val item = getItem(position)
+                    showItemDetailsDialog(item)
                 }
             }
 
             roomBookNowButton.setOnClickListener {
                 showCancelBookingConfirmation()
             }
-
         }
 
         private fun showCancelBookingConfirmation() {
@@ -93,20 +83,41 @@ class InOutAdapter(private val viewModel: InOutViewModel) :
                 .show()
         }
 
-        fun bind(item: Item, isExpanded: Boolean) {
-            buildingNameTextView.text = "Building: " + item.roomBuildingName
-            roomNumberTextView.text = "Floor No: " + item.roomNumber
-            floorNumberTextView.text = "Room No: " + item.floorNumber
-            bedTypeTextView.text = "Bed Type: " + item.bedType
+        private fun showItemDetailsDialog(item: Item) {
+            val dialogView = LayoutInflater.from(itemView.context)
+                .inflate(R.layout.dialog_item_details, null)
 
-            nameTextView.text = "C. Name: " + item.name
-            detailsTextView.text = "C. Details: " + item.details
-            entryDateTextView.text = "Check-in: " + item.entryDate
-            exitDateTextView.text = "Check-out: " + item.exitDate
+            dialogView.findViewById<TextView>(R.id.buildingNameTextView)
+                .text = item.roomBuildingName
+            dialogView.findViewById<TextView>(R.id.roomNumberTextView)
+                .text = item.roomNumber
+            dialogView.findViewById<TextView>(R.id.floorNumberTextView)
+                .text = item.floorNumber
+            dialogView.findViewById<TextView>(R.id.bedTypeTextView)
+                .text = item.bedType
+            dialogView.findViewById<TextView>(R.id.nameTextView)
+                .text = item.name
+            dialogView.findViewById<TextView>(R.id.detailsTextView)
+                .text = item.details
+            dialogView.findViewById<TextView>(R.id.entryDateTextView)
+                .text = item.entryDate
+            dialogView.findViewById<TextView>(R.id.exitDateTextView)
+                .text = item.exitDate
 
-            expandableLayout.visibility = if (isExpanded) View.VISIBLE else View.GONE
+            AlertDialog.Builder(itemView.context)
+                .setView(dialogView)
+                .setPositiveButton("OK", null)
+                .show()
+        }
+
+        fun bind(item: Item) {
+            buildingNameTextView.text = item.roomBuildingName
+            roomNumberTextView.text = item.roomNumber
+            floorNumberTextView.text = item.floorNumber
+            bedTypeTextView.text = item.bedType
         }
     }
+
 
     private class ItemDiffCallback : DiffUtil.ItemCallback<Item>() {
         override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
@@ -123,15 +134,23 @@ class InOutAdapter(private val viewModel: InOutViewModel) :
     }
 
     private fun checkExitDatesAndCancelBooking(position: Int) {
-        val currentDate = Calendar.getInstance().timeInMillis.toString()
-
+        val currentDate = Calendar.getInstance().timeInMillis
         val item = getItem(position)
-        if (item.exitDate != null && item.exitDate!! < currentDate) {
-            item.let {
-                viewModel.cancelBooking(it.id)
+
+        Log.d("AutoCancelDebug", "Checking exit date for item: $item")
+
+        if (!item.exitDate.isNullOrEmpty()) {
+            val exitDateInMillis = item.exitDate.toLongOrNull()
+            Log.d("AutoCancelDebug", "Exit date in milliseconds: $exitDateInMillis")
+            if (exitDateInMillis != null && exitDateInMillis < currentDate) {
+                item.let {
+                    viewModel.cancelBooking(it.id)
+                    Log.d("AutoCancelDebug", "Booking cancelled for item: $item")
+                }
             }
         }
     }
+
 
     private val exitDateCheckRunnable = object : Runnable {
         override fun run() {
