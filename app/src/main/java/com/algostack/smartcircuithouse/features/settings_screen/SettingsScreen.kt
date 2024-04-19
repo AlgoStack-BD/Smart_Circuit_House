@@ -1,10 +1,10 @@
 package com.algostack.smartcircuithouse.features.settings_screen
 
 import android.os.Bundle
-import android.view.KeyEvent.DispatcherState
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -13,20 +13,15 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.algostack.smartcircuithouse.R
 import com.algostack.smartcircuithouse.databinding.FragmentSettingsScreenBinding
-import com.algostack.smartcircuithouse.features.home_screen.model.DoubleViewModel
-import com.algostack.smartcircuithouse.features.home_screen.model.DoubleViewModelFactory
-import com.algostack.smartcircuithouse.features.room_screen.dialog.AddRoomBottomSheetDialog
-import com.algostack.smartcircuithouse.features.settings_screen.Model.SettingViewModelFactory
+import com.algostack.smartcircuithouse.features.settings_screen.model.SettingViewModelFactory
 import com.algostack.smartcircuithouse.features.settings_screen.language_change.LanguageChangeBottomSheetDialog
 import com.algostack.smartcircuithouse.features.settings_screen.team_member.AddTeamMemberBottomSheetDialog
 import com.algostack.smartcircuithouse.features.settings_screen.viewmodel.SettingViewModel
-import com.algostack.smartcircuithouse.services.db.RoomDB
 import com.algostack.smartcircuithouse.utils.TokenManager
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class SettingsScreen : Fragment() {
 
@@ -34,7 +29,11 @@ class SettingsScreen : Fragment() {
     private val binding get() = _binding!!
     val firebaseAuth = FirebaseAuth.getInstance()
     val currentUser = firebaseAuth.currentUser
-    private val settingViewModel by viewModels<SettingViewModel> { SettingViewModelFactory(requireContext()) }
+    private val settingViewModel by viewModels<SettingViewModel> {
+        SettingViewModelFactory(
+            requireContext()
+        )
+    }
 
 
     override fun onCreateView(
@@ -98,18 +97,32 @@ class SettingsScreen : Fragment() {
 
         binding.addteammember.setOnClickListener {
             val bottomSheet = AddTeamMemberBottomSheetDialog()
-            bottomSheet.show(parentFragmentManager,bottomSheet.tag)
+            bottomSheet.show(parentFragmentManager, bottomSheet.tag)
         }
 
         binding.LogOutbtn.setOnClickListener {
             firebaseAuth.signOut()
             TokenManager(requireContext()).clearUid()
-           findNavController().navigate(R.id.action_settingsScreen_to_loginScreen)
+            findNavController().navigate(R.id.action_settingsScreen_to_loginScreen)
 
+        }
+
+        binding.layoutAbout.setOnClickListener {
+            showAboutDialog()
         }
 
     }
 
+    private fun showAboutDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_about, null)
+
+        val alertDialog = AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .setPositiveButton(android.R.string.ok, null)
+            .create()
+
+        alertDialog.show()
+    }
 
 
     override fun onDestroyView() {

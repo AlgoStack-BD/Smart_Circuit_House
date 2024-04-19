@@ -18,7 +18,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+
 class AddRoomBottomSheetDialog(private val roomDao: RoomDao, private val buildingId: Int, private val buildingName: String, private val buildingPrimaryKey: String) :
+
     BottomSheetDialogFragment() {
 
     override fun onCreateView(
@@ -55,7 +57,7 @@ class AddRoomBottomSheetDialog(private val roomDao: RoomDao, private val buildin
             val bedType = spinnerBedType.selectedItem.toString().trim()
             val floorNo = etFloorNo.text.toString().trim()
 
-            if (roomNo.isNotEmpty() && bedType != getString(R.string.bed_type_hint) && floorNo != null) {
+            if (roomNo.isNotEmpty() && bedType != getString(R.string.bed_type_hint) && floorNo.isNotEmpty()) {
                 val roomData = RoomData(
                     roomNo = roomNo,
                     bedType = bedType,
@@ -72,9 +74,10 @@ class AddRoomBottomSheetDialog(private val roomDao: RoomDao, private val buildin
                     etRoomNo.error = "Room number is required"
                 }
                 if (bedType == getString(R.string.bed_type_hint)) {
-                    Toast.makeText(requireContext(), "Please select a bed type", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Please select a bed type", Toast.LENGTH_SHORT)
+                        .show()
                 }
-                if (floorNo == null) {
+                if (floorNo.isEmpty()) {
                     etFloorNo.error = "Floor number is required"
                 }
             }
@@ -84,10 +87,25 @@ class AddRoomBottomSheetDialog(private val roomDao: RoomDao, private val buildin
     private fun saveRoomInfo(roomData: RoomData) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                roomDao.insert(roomData)
+                val existingRoom = roomDao.getRoomByNumberAndFloorAndBuilding(
+                    roomData.roomNo,
+                    roomData.floorNo,
+                    roomData.roomBuildingName
+                )
+                if (existingRoom == null) {
+                    roomDao.insert(roomData)
+                } else {
+                    showToast("Room with the same details already exists")
+                }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
+        }
+    }
+
+    private fun showToast(message: String) {
+        CoroutineScope(Dispatchers.Main).launch {
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
         }
     }
 }

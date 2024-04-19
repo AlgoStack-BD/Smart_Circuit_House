@@ -1,9 +1,8 @@
-package com.algostack.smartcircuithouse.features.settings_screen.Model
+package com.algostack.smartcircuithouse.features.settings_screen.model
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.algostack.smartcircuithouse.features.home_screen.model.DoubleViewModel
 import com.algostack.smartcircuithouse.features.settings_screen.viewmodel.SettingViewModel
 
 class SettingViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
