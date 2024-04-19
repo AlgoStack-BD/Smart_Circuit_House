@@ -5,7 +5,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
@@ -25,13 +24,13 @@ import kotlinx.coroutines.launch
 class BuildingAdapter(private val itemClickListener: OnItemClickListener) :
     ListAdapter<BuildingData, BuildingAdapter.CardViewHolder>(DiffCallback) {
     interface OnItemClickListener {
-        fun onItemClick(title: String, buildingId: Int)
+        fun onItemClick(title: String, buildingId: Int, primaryKey: String)
     }
 
     companion object {
         private val DiffCallback = object : DiffUtil.ItemCallback<BuildingData>() {
             override fun areItemsTheSame(oldItem: BuildingData, newItem: BuildingData): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem.primaryKey == newItem.primaryKey
             }
 
             override fun areContentsTheSame(oldItem: BuildingData, newItem: BuildingData): Boolean {
@@ -64,7 +63,7 @@ class BuildingAdapter(private val itemClickListener: OnItemClickListener) :
             textViewTitle.text = item.title
 
             itemView.setOnClickListener {
-                itemClickListener.onItemClick(item.title, item.id)
+                itemClickListener.onItemClick(item.title, item.id ,item.primaryKey)
             }
 
             itemView.setOnLongClickListener {
@@ -90,9 +89,11 @@ class BuildingAdapter(private val itemClickListener: OnItemClickListener) :
             val roomDao = RoomDB.getDatabase(context).roomDao()
 
             CoroutineScope(Dispatchers.IO).launch {
+
                 roomDao.deleteRoomsForBuilding(item.id)
 
                 buildingDao.delete(item.id)
+
             }
             showSnackbar(itemView, "Building and associated rooms deleted successfully")
         }

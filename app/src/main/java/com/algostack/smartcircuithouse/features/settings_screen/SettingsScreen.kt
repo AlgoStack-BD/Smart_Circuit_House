@@ -58,13 +58,16 @@ class SettingsScreen : Fragment() {
             requireActivity().onBackPressed()
         }
 
-//
-//        if (currentUser != null) {
-//            // User is signed in
-//            // Proceed to get email (explained below)
-//        } else {
-//            // No user is signed in
-//        }
+
+        if(TokenManager(requireContext()).getUid() != null){
+            if (currentUser != null) {
+                //get current login email
+                val email = currentUser.email
+                binding.userEmail.text = email
+            }
+        }
+
+
 
 
         binding.backupData.setOnClickListener {

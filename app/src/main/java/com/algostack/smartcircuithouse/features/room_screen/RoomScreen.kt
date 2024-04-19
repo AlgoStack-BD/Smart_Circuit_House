@@ -54,6 +54,7 @@ class RoomScreen : Fragment(), RoomAdapter.OnBookNowClickListener, RoomAdapter.O
 
         val buildingId = arguments?.getInt("buildingId") ?: -1
         val buildingName = arguments?.getString("title") ?: "Default Building Name"
+        val buildingPrimaryKey = arguments?.getString("primaryKey") ?: "Default Primary Key"
 
         val toolbar = view.findViewById<Toolbar>(R.id.toolbarBuildingName)
         toolbar.title = buildingName
@@ -69,7 +70,7 @@ class RoomScreen : Fragment(), RoomAdapter.OnBookNowClickListener, RoomAdapter.O
 
         progressBar.visibility = View.VISIBLE
 
-        viewModel.getRoomsForBuilding(buildingId).observe(viewLifecycleOwner) { rooms ->
+        viewModel.getRoomsForBuilding(buildingPrimaryKey).observe(viewLifecycleOwner) { rooms ->
             if (rooms.isEmpty()) {
                 progressBar.visibility = View.GONE
                 binding.textViewTotalRoomItems.text = "Total Items: ${rooms.size}"
@@ -82,7 +83,7 @@ class RoomScreen : Fragment(), RoomAdapter.OnBookNowClickListener, RoomAdapter.O
 
         binding.fabAddRoom.setOnClickListener {
             val roomDao = RoomDB.getDatabase(requireContext()).roomDao()
-            val bottomSheet = AddRoomBottomSheetDialog(roomDao, buildingId, buildingName)
+            val bottomSheet = AddRoomBottomSheetDialog(roomDao, buildingId, buildingName, buildingPrimaryKey)
             bottomSheet.show(parentFragmentManager, bottomSheet.tag)
         }
     }

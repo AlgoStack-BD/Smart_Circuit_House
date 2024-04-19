@@ -7,5 +7,7 @@ import androidx.room.PrimaryKey
 data class BuildingData(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val name: String
+    val name: String,
+    // generated random key is first 4 are string and last 4 are number
+    val primaryKey: String = "SCH"+(1..6).map { ('a'..'z').random() }.joinToString("") + (1..9).map { (0..6).random() }.joinToString("")
 )

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.PrimaryKey
 import androidx.room.Query
 import androidx.room.Update
 import com.algostack.smartcircuithouse.services.model.RoomData
@@ -49,8 +50,12 @@ interface RoomDao {
     @Query("SELECT * FROM rooms")
     fun getAllRooms(): LiveData<List<RoomData>>
 
-    @Query("SELECT * FROM rooms WHERE buildingId = :buildingId")
-    fun getRoomsForBuilding(buildingId: Int): LiveData<List<RoomData>>
+//    @Query("SELECT * FROM rooms WHERE buildingId = :buildingId")
+//    fun getRoomsForBuilding(buildingId: Int): LiveData<List<RoomData>>
+
+
+    @Query("SELECT * FROM rooms WHERE primaryKey = :primaryKey")
+    fun getRoomsForBuilding(primaryKey: String): LiveData<List<RoomData>>
 
     @Query("SELECT * FROM rooms WHERE bedType = :bedType")
     fun getRoomsByBedType(bedType: String): LiveData<List<RoomData>>

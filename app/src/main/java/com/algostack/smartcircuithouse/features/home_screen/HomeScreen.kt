@@ -48,7 +48,6 @@ class HomeScreen : Fragment() {
         }
 
         val adapter = TabPagerAdapter(requireContext(), childFragmentManager)
-
         binding.viewPager.adapter = adapter
         binding.tabLayout.setupWithViewPager(binding.viewPager)
 

@@ -38,10 +38,10 @@ class LoginScreen : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.icClose.setOnClickListener {
-            findNavController().navigate(R.id.action_loginScreen_to_homeScreen)
-        }
+//
+//        binding.icClose.setOnClickListener {
+//            findNavController().navigate(R.id.action_loginScreen_to_homeScreen)
+//        }
 
 
 

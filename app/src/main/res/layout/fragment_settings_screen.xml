@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@id/appBarLayout">
 
         <TextView
-            android:id="@+id/profileTitle"
+            android:id="@+id/userEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
