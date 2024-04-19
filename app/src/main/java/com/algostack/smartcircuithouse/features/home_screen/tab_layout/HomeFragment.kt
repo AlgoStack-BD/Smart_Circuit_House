@@ -52,7 +52,8 @@ class HomeFragment : Fragment(), BuildingAdapter.OnItemClickListener {
                     BuildingData(
                         id = it.id,
                         imageResource = R.drawable.building,
-                        title = it.name
+                        title = it.name,
+                        primaryKey = it.primaryKey
                     )
                 })
                 binding.textViewTotalBuildingItems.text = "Total Items: ${buildings.size}"
@@ -66,8 +67,12 @@ class HomeFragment : Fragment(), BuildingAdapter.OnItemClickListener {
         _binding = null
     }
 
-    override fun onItemClick(title: String, buildingId: Int) {
-        val action = HomeScreenDirections.actionHomeScreenToRoomScreen(title, buildingId)
+    override fun onItemClick(title: String, buildingId: Int, primaryKey: String) {
+        val action = HomeScreenDirections.actionHomeScreenToRoomScreen(
+            title,
+            buildingId,
+            primaryKey
+        )
         findNavController().navigate(action)
     }
 }

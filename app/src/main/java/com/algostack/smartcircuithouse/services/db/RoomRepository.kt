@@ -7,8 +7,8 @@ class RoomRepository(private val roomDao: RoomDao) {
 
     val allRooms: LiveData<List<RoomData>> = roomDao.getAllRooms()
 
-    fun getRoomsForBuilding(buildingId: Int): LiveData<List<RoomData>> {
-        return roomDao.getRoomsForBuilding(buildingId)
+    fun getRoomsForBuilding(buildingPrimaryKey: String): LiveData<List<RoomData>> {
+        return roomDao.getRoomsForBuilding(buildingPrimaryKey)
     }
 
     suspend fun insert(roomData: RoomData) {

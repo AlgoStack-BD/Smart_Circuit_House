@@ -13,8 +13,9 @@ data class RoomData(
     val buildingId: Int,
     val roomBuildingName: String,
     var isBooked: Boolean = false,
-    var customerName: String? = null,
-    var customerDetails: String? = null,
-    var entryDate: Long? = null,
-    var exitDate: Long? = null
+    var customerName: String? = "",
+    var customerDetails: String? = "",
+    var entryDate: Long? = 0,
+    var exitDate: Long? = 0,
+    var primaryKey: String
 )

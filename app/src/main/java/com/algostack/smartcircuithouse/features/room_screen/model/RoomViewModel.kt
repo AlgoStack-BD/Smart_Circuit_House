@@ -11,8 +11,8 @@ class RoomViewModel(private val repository: RoomRepository) : ViewModel() {
 
     val allRooms: LiveData<List<RoomData>> = repository.allRooms
 
-    fun getRoomsForBuilding(buildingId: Int): LiveData<List<RoomData>> {
-        return repository.getRoomsForBuilding(buildingId)
+    fun getRoomsForBuilding(buildingPrimaryKey: String): LiveData<List<RoomData>> {
+        return repository.getRoomsForBuilding(buildingPrimaryKey)
     }
 
     fun insert(roomData: RoomData) {
