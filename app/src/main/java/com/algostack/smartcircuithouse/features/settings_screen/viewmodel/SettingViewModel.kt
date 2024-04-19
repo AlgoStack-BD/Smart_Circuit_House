@@ -21,11 +21,13 @@ class SettingViewModel  (private val context: Context) : ViewModel() {
     }
 
 
-    suspend fun getAllDataForBackup(context: Context){
+    suspend fun getAllDataForBackup(context: Context)  {
+
         viewModelScope.launch {
-            dataBackupRepository.getAllDataForBackup(context)
+           dataBackupRepository.getAllDataForBackup(context)
 
         }
+
 
 
     }

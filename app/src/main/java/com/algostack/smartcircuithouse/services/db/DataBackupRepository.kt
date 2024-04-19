@@ -1,9 +1,11 @@
 package com.algostack.smartcircuithouse.services.db
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.algostack.smartcircuithouse.R
 import com.algostack.smartcircuithouse.services.model.BuildingData
 import com.algostack.smartcircuithouse.services.model.RoomData
 import com.google.firebase.database.DataSnapshot
@@ -62,6 +64,9 @@ class DataBackupRepository (
                 override fun onCancelled(error: DatabaseError) {
                     // Handle error
                 }
+
+
+
             })
 
 
@@ -103,8 +108,12 @@ class DataBackupRepository (
 
             override fun onCancelled(error: DatabaseError) {
                 // Handle error
+
+                processingBuilding = false
             }
         })
+
+
     }
 
 
@@ -176,6 +185,7 @@ class DataBackupRepository (
             }
         } catch (e: Exception) {
             println("Error getting data from firebase: ${e.message}")
+
         }
     }
 
@@ -184,21 +194,15 @@ class DataBackupRepository (
 
     fun progressData(context: Context) {
 
+        // Dialad initialize and show
+        val dialog = Dialog(context)
+        dialog.setContentView(R.layout.custom_progressba)
+
         if (processingBuilding && processingRoom) {
-            // alert dialog to show data backup is completed
-            AlertDialog.Builder(context)
-                .setTitle("Data Backup")
-                .setMessage("Data backup is completed")
-                .setPositiveButton("OK") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                .show()
-
-
-        } else {
+            dialog.dismiss()
 
             // if already processing data then show alert dialog then create new alert dialog
-               AlertDialog.Builder(context)
+            AlertDialog.Builder(context)
                 .setTitle("Data Backup")
                 .setMessage("Data backup is in progress")
                 .setPositiveButton("OK") { dialog, _ ->
@@ -207,6 +211,9 @@ class DataBackupRepository (
                 .show()
 
 
+        } else {
+
+            dialog.show()
         }
 
     }

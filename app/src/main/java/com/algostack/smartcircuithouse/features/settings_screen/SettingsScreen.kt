@@ -81,9 +81,12 @@ class SettingsScreen : Fragment() {
 
 
         binding.SyncData.setOnClickListener {
+            val result = false
+            binding.spinKit.visibility = View.VISIBLE
             CoroutineScope(Dispatchers.Main).launch {
-                settingViewModel.syncData(requireContext())
+               settingViewModel.syncData(requireContext())
             }
+
         }
 
 
