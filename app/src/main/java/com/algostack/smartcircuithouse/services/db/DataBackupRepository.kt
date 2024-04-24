@@ -1,9 +1,12 @@
 package com.algostack.smartcircuithouse.services.db
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.algostack.smartcircuithouse.R
 import com.algostack.smartcircuithouse.services.model.BuildingData
 import com.algostack.smartcircuithouse.services.model.RoomData
 import com.google.firebase.database.DataSnapshot
@@ -26,10 +29,8 @@ class DataBackupRepository (
     private val firebaseRoomReference: DatabaseReference = firebaseDatabase.getReference("Room")
 
 
-    var processingBuilding = false
-    var processingRoom = false
 
-
+/*
     suspend fun getAllDataForBackup(context: Context)  {
         progressData(context)
 
@@ -62,6 +63,9 @@ class DataBackupRepository (
                 override fun onCancelled(error: DatabaseError) {
                     // Handle error
                 }
+
+
+
             })
 
 
@@ -103,14 +107,87 @@ class DataBackupRepository (
 
             override fun onCancelled(error: DatabaseError) {
                 // Handle error
+
+                processingBuilding = false
             }
         })
+
+
+    }
+*/
+
+
+    suspend fun getAllDataForBackup(context: Context) {
+        val progressDialog = Dialog(context).apply {
+            setContentView(R.layout.custom_progressba)
+            show()
+        }
+
+        try {
+            // Backup building data
+            val buildingDataList = buildingDao.getAllBuildingsForBackup()
+            withContext(Dispatchers.IO) {
+                try {
+                    val snapshot = firebaseBuildingReference.get().await()
+                    if (snapshot.exists()) {
+                        for (buildingData in buildingDataList) {
+                            if (!snapshot.hasChild(buildingData.primaryKey.toString())) {
+                                firebaseBuildingReference.child(buildingData.id.toString()).setValue(buildingData).await()
+                            }
+                        }
+                    } else {
+                        buildingDataList.forEach { roomData ->
+                            firebaseBuildingReference.child(roomData.primaryKey.toString()).setValue(roomData).await()
+                        }
+                    }
+
+                } catch (e: Exception) {
+                    throw Exception("Failed to backup building data: ${e.message}")
+                }
+            }
+
+            // Backup room data
+            val roomDataList = roomDao.getAllRoomDataForBackup()
+            withContext(Dispatchers.IO) {
+                try {
+                    val snapshot = firebaseRoomReference.get().await()
+                    if (snapshot.exists()) {
+                        for (roomData in roomDataList) {
+                            if (!snapshot.hasChild(roomData.primaryKey)) {
+                                firebaseRoomReference.child(roomData.id).setValue(roomData).await()
+                            } else {
+                                val isBooked = snapshot.child(roomData.primaryKey).child("booked").value.toString().toBoolean()
+                                if (isBooked != roomData.isBooked) {
+                                    firebaseRoomReference.child(roomData.primaryKey).setValue(roomData).await()
+                                }
+                            }
+                        }
+                    } else {
+                        roomDataList.forEach { roomData ->
+                            firebaseRoomReference.child(roomData.primaryKey.toString()).setValue(roomData).await()
+                        }
+                    }
+
+                } catch (e: Exception) {
+                    throw Exception("Failed to backup room data: ${e.message}")
+                }
+            }
+
+            progressDialog.dismiss()
+        } catch (e: Exception) {
+            progressDialog.dismiss()
+            Toast.makeText(context, "Backup failed: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
     }
 
 
+
     suspend fun syncDataFromServer(context: Context) {
-        println("Syncing data from server")
-        progressData(context)
+
+        val dialog = Dialog(context).apply {
+            setContentView(R.layout.custom_progressba)
+            show()
+        }
 
 
         try {
@@ -138,8 +215,6 @@ class DataBackupRepository (
                     buildingDao.insert(buildingData)
                 }
 
-                processingBuilding = true
-                progressData(context)
             } else {
                 println("No building data found")
             }
@@ -169,47 +244,19 @@ class DataBackupRepository (
                 roomDataList.forEach { roomData ->
                     roomDao.insert(roomData)
                 }
-                processingRoom = true
-                progressData(context)
+
             } else {
                 println("No room data found")
             }
         } catch (e: Exception) {
             println("Error getting data from firebase: ${e.message}")
-        }
-    }
-
-
-
-
-    fun progressData(context: Context) {
-
-        if (processingBuilding && processingRoom) {
-            // alert dialog to show data backup is completed
-            AlertDialog.Builder(context)
-                .setTitle("Data Backup")
-                .setMessage("Data backup is completed")
-                .setPositiveButton("OK") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                .show()
-
-
-        } else {
-
-            // if already processing data then show alert dialog then create new alert dialog
-               AlertDialog.Builder(context)
-                .setTitle("Data Backup")
-                .setMessage("Data backup is in progress")
-                .setPositiveButton("OK") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                .show()
-
 
         }
 
+
+        dialog.dismiss()
     }
+
 
 
 
